@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.app_ban_hang.R;
 
-public class activity_intro extends AppCompatActivity {
+public class page_intro_activity extends AppCompatActivity {
     private AppCompatButton Start;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class activity_intro extends AppCompatActivity {
         });
         Start = findViewById(R.id.Start);
         Start.setOnClickListener(v -> {
-            Intent intent = new Intent(activity_intro.this, activity_login.class);
+            Intent intent = new Intent(page_intro_activity.this, page_login_activity.class);
             startActivity(intent);
         });
     }

@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.database;
 
-public class dangki extends AppCompatActivity {
+public class page_dangki_activity extends AppCompatActivity {
     private AppCompatButton dangki;
     private EditText phone, email, pass, ten;
     private database db;

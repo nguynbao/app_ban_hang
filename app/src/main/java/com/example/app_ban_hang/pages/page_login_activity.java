@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.database;
 
-public class activity_login extends AppCompatActivity {
+public class page_login_activity extends AppCompatActivity {
     private AppCompatButton dangnhap;
 
     private EditText  email, pass;
@@ -43,7 +43,7 @@ public class activity_login extends AppCompatActivity {
             String pw = pass.getText().toString().trim();
 
             if (e.isEmpty() || pw.isEmpty()) {
-                Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                Toast.makeText(page_login_activity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
             // (tuỳ chọn) kiểm tra định dạng email
@@ -53,10 +53,10 @@ public class activity_login extends AppCompatActivity {
             }
             boolean check = db.dangNhap(e, pw);
             if (check) {
-                Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(activity_login.this, page_home_activity.class));
+                Toast.makeText(page_login_activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(page_login_activity.this, page_home_activity.class));
             } else {
-                Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(page_login_activity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
             }
         });
         txt_dangki = findViewById(R.id.txt_dangki);
@@ -64,7 +64,7 @@ public class activity_login extends AppCompatActivity {
         txt_dangki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity_login.this, dangki.class);
+                Intent intent = new Intent(page_login_activity.this, page_dangki_activity.class);
                 startActivity(intent);
             }
         });

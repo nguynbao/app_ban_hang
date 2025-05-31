@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".pages.activity_login">
+    tools:context=".pages.page_login_activity">
     <ImageView
         android:layout_width="317dp"
         android:layout_height="0dp"
