@@ -1,7 +1,5 @@
 package com.example.app_ban_hang.pages;
 
-import static java.lang.Boolean.TRUE;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +38,36 @@ public class activity_login extends AppCompatActivity {
         dangnhap = findViewById(R.id.dangnhap);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
+        dangnhap.setOnClickListener(v -> {
+            String e = email.getText().toString().trim();
+            String pw = pass.getText().toString().trim();
 
+            if (e.isEmpty() || pw.isEmpty()) {
+                Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            // (tuỳ chọn) kiểm tra định dạng email
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(e).matches()) {
+                Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            boolean check = db.dangNhap(e, pw);
+            if (check) {
+                Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(activity_login.this, page_home_activity.class));
+            } else {
+                Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+        txt_dangki = findViewById(R.id.txt_dangki);
+
+        txt_dangki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity_login.this, dangki.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
