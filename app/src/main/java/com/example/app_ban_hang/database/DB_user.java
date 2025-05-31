@@ -15,7 +15,7 @@ public class DB_user extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE user(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                " password TEXT," +
+                "password TEXT," +
                 "email TEXT UNIQUE," +
                 "phone TEXT UNIQUE)");
     }
@@ -24,12 +24,18 @@ public class DB_user extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS user");
         onCreate(db);
     }
-    public boolean dangKi( String password, String email, String phone){
+    public boolean dangKi(String password, String email, String phone){
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "INSERT INTO user(password, email, phone) VALUES(?,?,?)";
-        db.execSQL(sql, new String[]{password, email, phone});
-        return true;
+        try {
+            db.execSQL(sql, new String[]{password, email, phone});
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
     public boolean dangNhap(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
@@ -38,5 +44,6 @@ public class DB_user extends SQLiteOpenHelper {
         cursor.close();
         return result;
     }
+
 
 }

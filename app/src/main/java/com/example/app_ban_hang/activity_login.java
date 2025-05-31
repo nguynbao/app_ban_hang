@@ -43,8 +43,10 @@ public class activity_login extends AppCompatActivity {
             String e = email.getText().toString();
             if (p.isEmpty() || pw.isEmpty() || e.isEmpty()){
                 Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                return;
             }else if (p.length() != 10){
                 Toast.makeText(activity_login.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
             }
           boolean check = db.dangKi(pw,e, p);
             if (check){
@@ -55,21 +57,23 @@ public class activity_login extends AppCompatActivity {
 
         });
         dangnhap.setOnClickListener(v -> {
-            String e = email.getText().toString();
-            String pw= pass.getText().toString();
-            startActivity(new Intent(activity_login.this, page_home_activity.class));
-//            boolean check = db.dangNhap(e, pw);
-//            if (check){
-//                Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-//
-//            }else {
-//                Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-//            }
-//            if (e.isEmpty() || pw.isEmpty()){
-//                Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-//            }
+            String e = email.getText().toString().trim();
+            String pw = pass.getText().toString().trim();
 
+            if (e.isEmpty() || pw.isEmpty()) {
+                Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            boolean check = db.dangNhap(e, pw);
+            if (check) {
+                Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(activity_login.this, page_home_activity.class));
+            } else {
+                Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+            }
         });
+
     }
 }
 
