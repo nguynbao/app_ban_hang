@@ -34,17 +34,30 @@ public class database extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean dangKi(String password, String email, String phone){
+    public boolean dangKi(String name, String email , String password, String phone){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "INSERT INTO users (password, email, phone) VALUES(?,?,?)";
+        if(checkEmailExists(email)){
+            // Email đã tồn tại
+            return false;
+        }
+        String sql = "INSERT INTO users (full_name, email, password, phone) VALUES(?,?,?,?)";
         try {
-            db.execSQL(sql, new String[]{password, email, phone});
+            db.execSQL(sql, new String[]{name, email, password, phone});
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+    public boolean checkEmailExists(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM users WHERE email = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{email});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
+
 
     public boolean dangNhap(String email, String password){
         SQLiteDatabase db = this.getReadableDatabase();

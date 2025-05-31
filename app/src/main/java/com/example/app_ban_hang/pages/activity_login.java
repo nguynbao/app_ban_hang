@@ -18,7 +18,7 @@ import com.example.app_ban_hang.database.database;
 public class activity_login extends AppCompatActivity {
     private AppCompatButton dangnhap;
 
-    private EditText  email, pass;
+    private EditText  email, pass, dangki;
     private database db;
 
     @Override
@@ -33,6 +33,7 @@ public class activity_login extends AppCompatActivity {
         });
         db = new database(this);
         dangnhap = findViewById(R.id.dangnhap);
+        dangki = findViewById(R.id.dangki);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         dangnhap.setOnClickListener(v -> {
@@ -51,6 +52,9 @@ public class activity_login extends AppCompatActivity {
             } else {
                 Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
             }
+        });
+        dangki.setOnClickListener(v->{
+            startActivity(new Intent(activity_login.this, dangki.class));
         });
 
     }

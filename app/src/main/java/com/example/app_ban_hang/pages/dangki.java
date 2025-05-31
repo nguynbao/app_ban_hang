@@ -37,17 +37,18 @@ public class dangki extends AppCompatActivity {
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         dangki.setOnClickListener(v -> {
+            String t = ten.getText().toString();
             String p = phone.getText().toString();
             String pw= pass.getText().toString();
             String e = email.getText().toString();
-            if (p.isEmpty() || pw.isEmpty() || e.isEmpty()){
+            if (t.isEmpty() ||p.isEmpty() || pw.isEmpty() || e.isEmpty()){
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }else if (p.length() != 10){
                 Toast.makeText(this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
                 return;
             }
-            boolean check = db.dangKi(pw,e, p);
+            boolean check = db.dangKi(t,e,pw,p);
             if (check){
                 Toast.makeText(this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
             }else {
