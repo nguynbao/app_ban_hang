@@ -3,6 +3,7 @@ package com.example.app_ban_hang.pages;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,7 +19,8 @@ import com.example.app_ban_hang.database.database;
 public class activity_login extends AppCompatActivity {
     private AppCompatButton dangnhap;
 
-    private EditText  email, pass, dangki;
+    private EditText  email, pass;
+    private TextView dangki;
     private database db;
 
     @Override
@@ -33,7 +35,7 @@ public class activity_login extends AppCompatActivity {
         });
         db = new database(this);
         dangnhap = findViewById(R.id.dangnhap);
-        dangki = findViewById(R.id.dangki);
+        dangki = findViewById(R.id.txvdangki);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         dangnhap.setOnClickListener(v -> {
