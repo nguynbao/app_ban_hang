@@ -42,7 +42,7 @@ public class page_home_activity extends AppCompatActivity {
                             tab.setIcon(R.drawable.icon_home);
                             break;
                         case 1:
-                            tab.setText("Categories");
+                            tab.setText("Cate");
                             tab.setIcon(R.drawable.icon_cate);
                             break;
                         case 2:
@@ -50,6 +50,10 @@ public class page_home_activity extends AppCompatActivity {
                             tab.setIcon(R.drawable.icon_search);
                             break;
                         case 3:
+                            tab.setText("Wish");
+                            tab.setIcon(R.drawable.icon_love);
+                            break;
+                        case 4:
                             tab.setText("Account");
                             tab.setIcon(R.drawable.icon_account);
                             break;

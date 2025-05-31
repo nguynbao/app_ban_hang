@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.app_ban_hang.Fragment.Fragment_Account;
 import com.example.app_ban_hang.Fragment.Fragment_Categories;
 import com.example.app_ban_hang.Fragment.Fragment_Search;
+import com.example.app_ban_hang.Fragment.Fragment_WishList;
 import com.example.app_ban_hang.Fragment.Fragment_home;
 
 public class adapter_viewpages extends FragmentStateAdapter {
@@ -26,6 +27,8 @@ public class adapter_viewpages extends FragmentStateAdapter {
             case 2:
                 return new Fragment_Search();
             case 3:
+                return new Fragment_WishList();
+            case 4:
                 return new Fragment_Account();
             default:
                 return new Fragment_home();
@@ -34,6 +37,6 @@ public class adapter_viewpages extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 }

@@ -28,7 +28,7 @@ public class page_login_activity extends AppCompatActivity {
     private EditText  email, pass;
     UserDAO userDAO;
     private TextView txt_dangki;
-    private static final String ADMIN_EMAIL = "admin@example.com";
+    private static final String ADMIN_EMAIL = "admin";
     private static final String ADMIN_PASSWORD = "admin123";
 
 
