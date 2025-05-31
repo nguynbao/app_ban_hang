@@ -45,7 +45,6 @@ public class Create_table {
                     "wishlist_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "user_id INTEGER NOT NULL," +
                     "product_id INTEGER NOT NULL," +
-                    "added_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                     "FOREIGN KEY (user_id) REFERENCES users(user_id) " +
                     "ON DELETE CASCADE ON UPDATE CASCADE," +
                     "FOREIGN KEY (product_id) REFERENCES products(product_id) " +
@@ -59,13 +58,6 @@ public class Create_table {
                     "order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                     "total_amount REAL NOT NULL DEFAULT 0.00," +
                     "shipping_address TEXT NOT NULL," +
-                    "shipping_city TEXT NOT NULL," +
-                    "shipping_state TEXT," +
-                    "shipping_postal_code TEXT," +
-                    "shipping_country TEXT NOT NULL," +
-                    "status TEXT NOT NULL DEFAULT 'PENDING'," +
-                    "created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
-                    "updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                     "FOREIGN KEY (user_id) REFERENCES users(user_id) " +
                     "ON DELETE RESTRICT ON UPDATE CASCADE" +
                     ");";
@@ -78,7 +70,6 @@ public class Create_table {
                     "quantity INTEGER NOT NULL," +
                     "unit_price REAL NOT NULL," +
                     "subtotal REAL NOT NULL," +
-                    "created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                     "FOREIGN KEY (order_id) REFERENCES orders(order_id) " +
                     "ON DELETE CASCADE ON UPDATE CASCADE," +
                     "FOREIGN KEY (product_id) REFERENCES products(product_id) " +

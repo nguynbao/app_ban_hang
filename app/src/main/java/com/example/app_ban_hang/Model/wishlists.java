@@ -5,6 +5,12 @@ public class wishlists {
     private int userId;
     private int productId;
 
+    public wishlists(int wishlistId, int userId, int productId) {
+        this.wishlistId = wishlistId;
+        this.userId = userId;
+        this.productId = productId;
+    }
+
     public int getProductId() {
         return productId;
     }

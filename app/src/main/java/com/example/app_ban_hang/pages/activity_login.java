@@ -2,7 +2,9 @@ package com.example.app_ban_hang.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +22,7 @@ public class activity_login extends AppCompatActivity {
 
     private EditText  email, pass;
     private database db;
+    private TextView txt_dangki;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,15 @@ public class activity_login extends AppCompatActivity {
                 startActivity(new Intent(activity_login.this, page_home_activity.class));
             } else {
                 Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+        txt_dangki = findViewById(R.id.txt_dangki);
+
+        txt_dangki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity_login.this, dangki.class);
+                startActivity(intent);
             }
         });
 
