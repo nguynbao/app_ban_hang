@@ -16,7 +16,6 @@ import com.example.app_ban_hang.R;
 
 public class Fragment_Account extends Fragment {
 
-
     public Fragment_Account() {
     }
 
