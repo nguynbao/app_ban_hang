@@ -50,6 +50,37 @@ public class UserDAO {
         String sql = "SELECT * FROM users";
         return getData(sql);
     }
+    public users getUserById(int id) {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(id)});
+        if (cursor != null && cursor.moveToFirst()) {
+            users user = new users(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("user_id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("full_name")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("email")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("password")),
+                    0, // phone mình chỉnh lại dưới
+                    cursor.getString(cursor.getColumnIndexOrThrow("address_line"))
+            );
+
+            // Bổ sung cột phone nếu trong database phone đang kiểu TEXT
+            try {
+                String phoneStr = cursor.getString(cursor.getColumnIndexOrThrow("phone"));
+                int phone = phoneStr != null ? Integer.parseInt(phoneStr) : 0;
+                user.setPhone(phone);
+            } catch (Exception e) {
+                user.setPhone(0);
+            }
+
+            cursor.close();
+            return user;
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        return null;
+    }
 
     // Get user by ID
     public users getById(String userId) {
@@ -60,6 +91,47 @@ public class UserDAO {
         }
         return null;
     }
+    // Sửa lại dangKi (đồng nhất với insert)
+    public boolean dangKy(String name, String email, String password, String phone, String city) {
+        if (checkEmailExists(email)) {
+            return false;
+        }
+        ContentValues values = new ContentValues();
+        values.put("full_name", name);
+        values.put("email", email);
+        values.put("password", password);
+        values.put("phone", phone);
+        values.put("address_line", city);
+        long result = db.insert("users", null, values);
+        return result != -1;
+    }
+    public boolean dangNhap(String email, String password) {
+
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ? AND password = ?", new String[]{email, password});
+        boolean result = cursor.moveToFirst(); // true nếu tìm thấy
+        cursor.close();
+        return result;
+    }
+
+
+    public boolean checkEmailExists(String email){
+        String sql = "SELECT * FROM users WHERE email = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{email});
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+        return exists;
+    }
+    public int getUserIdByEmail(String email) {
+        int userId = -1;
+
+        Cursor cursor = db.rawQuery("SELECT user_id FROM users WHERE email = ?", new String[]{email});
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
+        }
+        cursor.close();
+        return userId;
+    }
+
 
     // Check login (optional)
     public users checkLogin(String email, String password) {

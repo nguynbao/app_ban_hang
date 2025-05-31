@@ -59,21 +59,7 @@ public class database extends SQLiteOpenHelper {
     }
 
 
-    public boolean dangNhap(String email, String password){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery(sql, new String[]{email, password});
-            boolean result = cursor.getCount() > 0;
-            return result;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            if (cursor != null) cursor.close();
-        }
-    }
+
 
 
 
