@@ -36,24 +36,33 @@ public class dangki extends AppCompatActivity {
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         dangki.setOnClickListener(v -> {
-            String t = ten.getText().toString();
-            String p = phone.getText().toString();
-            String pw= pass.getText().toString();
-            String e = email.getText().toString();
-            if (t.isEmpty() ||p.isEmpty() || pw.isEmpty() || e.isEmpty()){
+            String t = ten.getText().toString().trim();
+            String p = phone.getText().toString().trim();
+            String pw = pass.getText().toString().trim();
+            String e = email.getText().toString().trim();
+
+            if (t.isEmpty() || p.isEmpty() || pw.isEmpty() || e.isEmpty()){
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
-            }else if (p.length() != 10){
+            } else if (p.length() != 10){
                 Toast.makeText(this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
                 return;
             }
-            boolean check = db.dangKi(t,e,pw,p);
-            if (check){
-                Toast.makeText(this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
+
+            // Kiểm tra email tồn tại trước khi gọi đăng ký
+            if (db.checkEmailExists(e)) {
+                Toast.makeText(this, "Email đã tồn tại!", Toast.LENGTH_SHORT).show();
+                return;
             }
 
+            boolean check = db.dangKi(t, e, pw, p);
+            if (check){
+                Toast.makeText(this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
+            }
         });
+
     }
 }

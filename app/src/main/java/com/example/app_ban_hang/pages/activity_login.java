@@ -46,7 +46,11 @@ public class activity_login extends AppCompatActivity {
                 Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
-
+            // (tuỳ chọn) kiểm tra định dạng email
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(e).matches()) {
+                Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
+            }
             boolean check = db.dangNhap(e, pw);
             if (check) {
                 Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
