@@ -5,12 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.page_search_activity"
+    android:layout_margin="30dp"
     android:orientation="vertical">
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:hint="Search"/>
+        android:hint="Search"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:background="@color/white"/>
 
 </LinearLayout>

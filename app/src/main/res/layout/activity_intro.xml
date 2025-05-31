@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_margin="20dp"
     android:gravity="center"
-    tools:context=".activity_intro">
+    tools:context=".pages.activity_intro">
     <ImageView
         android:layout_width="317dp"
         android:layout_height="168dp"

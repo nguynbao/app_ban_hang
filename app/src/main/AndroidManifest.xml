@@ -13,13 +13,16 @@
         android:theme="@style/Theme.App_ban_hang"
         tools:targetApi="31">
         <activity
+            android:name=".pages.dangki"
+            android:exported="false" />
+        <activity
             android:name=".pages.page_home_activity"
             android:exported="false" />
         <activity
-            android:name=".activity_login"
+            android:name=".pages.activity_login"
             android:exported="false" />
         <activity
-            android:name=".activity_intro"
+            android:name=".pages.activity_intro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
