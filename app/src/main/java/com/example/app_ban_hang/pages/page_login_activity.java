@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.UserDAO;
 import com.example.app_ban_hang.database.database;
+import com.example.app_ban_hang.pages_admin.page_admin_activity;
 
 public class page_login_activity extends AppCompatActivity {
     private AppCompatButton dangnhap;
@@ -27,6 +28,9 @@ public class page_login_activity extends AppCompatActivity {
     private EditText  email, pass;
     UserDAO userDAO;
     private TextView txt_dangki;
+    private static final String ADMIN_EMAIL = "admin@example.com";
+    private static final String ADMIN_PASSWORD = "admin123";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +47,13 @@ public class page_login_activity extends AppCompatActivity {
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         dangnhap.setOnClickListener(v -> {
+            // Kiểm tra thông tin đăng nhập
             String e = email.getText().toString().trim();
             String pw = pass.getText().toString().trim();
+            if (e.equals(ADMIN_EMAIL) && pw.equals(ADMIN_PASSWORD)) {
+                startActivity(new Intent(page_login_activity.this, page_admin_activity.class));
+                return;
+            }
 
             if (e.isEmpty() || pw.isEmpty()) {
                 Toast.makeText(page_login_activity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
@@ -69,7 +78,7 @@ public class page_login_activity extends AppCompatActivity {
                 Toast.makeText(page_login_activity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
             }});
 
-            txt_dangki = findViewById(R.id.txt_dangki);
+        txt_dangki = findViewById(R.id.txt_dangki);
 
         txt_dangki.setOnClickListener(new View.OnClickListener() {
             @Override
