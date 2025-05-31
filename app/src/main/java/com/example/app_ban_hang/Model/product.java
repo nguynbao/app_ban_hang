@@ -4,13 +4,15 @@ import java.math.BigInteger;
 
 public class product {
     private int product_id;
+    private int category_id;
     private String product_name;
     private String product_description;
-    private int product_price;
+    private float product_price;
     private int product_imgRes;
 
-    public product(int product_id, String product_name, String product_description, int product_price, int product_imgRes) {
+    public product(int product_id,int category_id, String product_name, String product_description, int product_price, int product_imgRes) {
         this.product_id = product_id;
+        this.category_id = category_id;
         this.product_name = product_name;
         this.product_description = product_description;
         this.product_price = product_price;
@@ -41,7 +43,7 @@ public class product {
         this.product_description = product_description;
     }
 
-    public int getProduct_price() {
+    public float getProduct_price() {
         return product_price;
     }
 

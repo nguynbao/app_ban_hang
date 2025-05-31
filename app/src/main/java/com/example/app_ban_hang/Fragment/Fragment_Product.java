@@ -76,9 +76,9 @@ public class Fragment_Product extends Fragment {
         // Dùng GridLayoutManager với 2 cột
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2); // 2 cột
         recycler_Product.setLayoutManager(layoutManager);
-        productList.add(new product(1,"Loa JBL", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeakeer));
-        productList.add(new product(1,"Loa Gojodo", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeaker1));
-        productList.add(new product(1,"Loa Kẹo Kéo", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeaker2));
+        productList.add(new product(1,1,"Loa JBL", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeakeer));
+        productList.add(new product(1,1,"Loa Gojodo", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeaker1));
+        productList.add(new product(1,1,"Loa Kẹo Kéo", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeaker2));
 
         adapter_product_overview adapterProductOverview = new adapter_product_overview(productList);
         recycler_Product.setAdapter(adapterProductOverview);

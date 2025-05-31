@@ -14,17 +14,32 @@
         android:layout_weight="0.1"
         android:src="@drawable/logo_1"
         android:layout_margin="20dp"/>
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3">
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
             android:orientation="vertical">
+            <EditText
+                android:id="@+id/fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edt_round_pre"
+                android:hint="Tên của bạn"
+                android:inputType="phone"
+                android:padding="10dp" />
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edt_round_pre"
+                android:hint="Số điện thoại"
+                android:inputType="phone"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/email"
@@ -41,49 +56,24 @@
                 android:id="@+id/pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:background="@drawable/edt_round_pre"
-                android:hint="Password"
                 android:inputType="textPassword"
-                android:padding="10dp" />
+                android:hint="Password"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/dangnhap"
+                android:id="@+id/dangki"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:background="@drawable/btn_round_white"
                 android:gravity="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Đăng Nhập"
+                android:layout_marginTop="30dp"
+                android:text="Đăng Kí"
                 android:textColor="@color/primary" />
-
-            <LinearLayout
-                android:layout_marginTop="40dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bạn chưa có tài khoản?"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Đăng Kí"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

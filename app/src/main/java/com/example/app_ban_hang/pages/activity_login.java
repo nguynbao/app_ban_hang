@@ -1,4 +1,4 @@
-package com.example.app_ban_hang;
+package com.example.app_ban_hang.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +12,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.app_ban_hang.database.DB_user;
-import com.example.app_ban_hang.pages.page_home_activity;
+import com.example.app_ban_hang.R;
+import com.example.app_ban_hang.database.database;
 
 public class activity_login extends AppCompatActivity {
     private AppCompatButton dangnhap;
-    private AppCompatButton dangki;
-    private EditText phone, email, pass;
-    private DB_user db;
+
+    private EditText  email, pass;
+    private database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,31 +31,10 @@ public class activity_login extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        db = new DB_user(this);
+        db = new database(this);
         dangnhap = findViewById(R.id.dangnhap);
-        dangki = findViewById(R.id.dangki);
-        phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
-        dangki.setOnClickListener(v -> {
-            String p = phone.getText().toString();
-            String pw= pass.getText().toString();
-            String e = email.getText().toString();
-            if (p.isEmpty() || pw.isEmpty() || e.isEmpty()){
-                Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                return;
-            }else if (p.length() != 10){
-                Toast.makeText(activity_login.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
-                return;
-            }
-          boolean check = db.dangKi(pw,e, p);
-            if (check){
-                Toast.makeText(activity_login.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(activity_login.this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
-            }
-
-        });
         dangnhap.setOnClickListener(v -> {
             String e = email.getText().toString().trim();
             String pw = pass.getText().toString().trim();

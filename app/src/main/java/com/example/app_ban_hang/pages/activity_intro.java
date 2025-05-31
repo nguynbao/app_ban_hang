@@ -1,4 +1,4 @@
-package com.example.app_ban_hang;
+package com.example.app_ban_hang.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.app_ban_hang.R;
 
 public class activity_intro extends AppCompatActivity {
     private AppCompatButton Start;
