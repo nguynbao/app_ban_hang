@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.Fragment_Categories"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:id="@+id/Fragment_categories">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -45,7 +46,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btn_cate_shoes"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
@@ -58,7 +59,7 @@
         app:layout_constraintVertical_bias="0.08" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btn_cate_clothing"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
@@ -71,7 +72,7 @@
         app:layout_constraintVertical_bias="0.08" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btn_cate_food"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
@@ -84,7 +85,7 @@
         app:layout_constraintVertical_bias="0.47" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btn_cate_accessories"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
@@ -97,6 +98,7 @@
         app:layout_constraintVertical_bias="0.47" />
 
     <ImageButton
+        android:id="@+id/btn_cate_comestic"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
@@ -109,6 +111,7 @@
         app:layout_constraintVertical_bias="0.86" />
 
     <ImageButton
+        android:id="@+id/btn_cate_tech"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"

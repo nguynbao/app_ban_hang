@@ -10,6 +10,8 @@ public class product {
     private float product_price;
     private int product_imgRes;
 
+    public product(){}
+
     public product(int product_id,int category_id, String product_name, String product_description, int product_price, int product_imgRes) {
         this.product_id = product_id;
         this.category_id = category_id;
@@ -57,5 +59,17 @@ public class product {
 
     public void setProduct_imgRes(int product_imgRes) {
         this.product_imgRes = product_imgRes;
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
+    public void setProduct_price(float product_price) {
+        this.product_price = product_price;
     }
 }
