@@ -14,7 +14,7 @@ public class Create_table {
             "CREATE TABLE categories (" +
                     "category_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT NOT NULL UNIQUE," +
-                    "image_url TEXT," +
+                    "image_url TEXT" +
                     ");";
 
     public static final String CREATE_TABLE_PRODUCTS =
