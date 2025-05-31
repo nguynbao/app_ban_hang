@@ -57,16 +57,17 @@ public class activity_login extends AppCompatActivity {
         dangnhap.setOnClickListener(v -> {
             String e = email.getText().toString();
             String pw= pass.getText().toString();
-            boolean check = db.dangNhap(e, pw);
-            if (check){
-                Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(activity_login.this, page_home_activity.class));
-            }else {
-                Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-            }
-            if (e.isEmpty() || pw.isEmpty()){
-                Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-            }
+            startActivity(new Intent(activity_login.this, page_home_activity.class));
+//            boolean check = db.dangNhap(e, pw);
+//            if (check){
+//                Toast.makeText(activity_login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//
+//            }else {
+//                Toast.makeText(activity_login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+//            }
+//            if (e.isEmpty() || pw.isEmpty()){
+//                Toast.makeText(activity_login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+//            }
 
         });
     }

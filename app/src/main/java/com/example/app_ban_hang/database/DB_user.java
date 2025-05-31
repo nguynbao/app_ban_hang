@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DB_user extends SQLiteOpenHelper {
-    private static final String DB_NAME = "user.db";
+    private static final String DB_NAME = "Database.db";
     private static final int DB_VERSION = 1;
     public DB_user(Context context){
         super(context, DB_NAME, null,  DB_VERSION);
@@ -28,12 +28,6 @@ public class DB_user extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "INSERT INTO user(password, email, phone) VALUES(?,?,?)";
         db.execSQL(sql, new String[]{password, email, phone});
-        return true;
-    }
-    public boolean dangNhap1(String username, String password){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-        db.rawQuery(sql, new String[]{username, password});
         return true;
     }
     public boolean dangNhap(String email, String password){
