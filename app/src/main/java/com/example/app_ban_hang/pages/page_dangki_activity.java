@@ -12,13 +12,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 
+import com.example.app_ban_hang.Model.users;
 import com.example.app_ban_hang.R;
+import com.example.app_ban_hang.database.UserDAO;
 import com.example.app_ban_hang.database.database;
 
 public class page_dangki_activity extends AppCompatActivity {
     private AppCompatButton dangki;
-    private EditText phone, email, pass, ten;
-    private database db;
+    private EditText phone, email, pass, ten, city;
+    UserDAO userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,40 +31,44 @@ public class page_dangki_activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        db = new database(this);
+        userDAO = new UserDAO(this);
         dangki = findViewById(R.id.dangki);
         ten = findViewById(R.id.fullname);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
+        city = findViewById(R.id.diachi);
         dangki.setOnClickListener(v -> {
-            String t = ten.getText().toString().trim();
-            String p = phone.getText().toString().trim();
-            String pw = pass.getText().toString().trim();
-            String e = email.getText().toString().trim();
-
-            if (t.isEmpty() || p.isEmpty() || pw.isEmpty() || e.isEmpty()){
-                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                return;
-            } else if (p.length() != 10){
-                Toast.makeText(this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Kiểm tra email tồn tại trước khi gọi đăng ký
-            if (db.checkEmailExists(e)) {
-                Toast.makeText(this, "Email đã tồn tại!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            boolean check = db.dangKi(t, e, pw, p);
-            if (check){
-                Toast.makeText(this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
-            }
+            registerUser();
         });
-
     }
-}
+    private void registerUser() {
+        String name = ten.getText().toString().trim();
+        String inputemail = email.getText().toString().trim();
+        String password = pass.getText().toString().trim();
+        String phoneStr = phone.getText().toString().trim();
+        String address = city.getText().toString().trim();
+
+        // Validate
+        if (name.isEmpty() || inputemail.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin bắt buộc!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int phone = 0;
+        try {
+            phone = Integer.parseInt(phoneStr);
+        } catch (NumberFormatException e) {
+            phone = 0; // hoặc bạn có thể hiển thị lỗi
+        }
+
+        users newUser = new users(0, name, inputemail, password, phone, address);
+        long result = userDAO.insert(newUser);
+
+        if (result > 0) {
+            Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+            finish(); // Quay về màn hình trước đó
+        } else {
+            Toast.makeText(this, "Đăng ký thất bại! Email đã tồn tại?", Toast.LENGTH_SHORT).show();
+        }
+}}
