@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.example.app_ban_hang.R;
 
 public class Fragment_Categories extends Fragment {
+    private ImageButton back;
 
     public Fragment_Categories() {
         // Required empty public constructor
@@ -28,8 +29,11 @@ public class Fragment_Categories extends Fragment {
         ImageButton btn_cate_accessories = view.findViewById(R.id.btn_cate_accessories);
         ImageButton btn_cate_comestic = view.findViewById(R.id.btn_cate_comestic);
         ImageButton btn_cate_tech = view.findViewById(R.id.btn_cate_tech);
+        back = view.findViewById(R.id.back);
         Bundle bundle = new Bundle();
-
+        back.setOnClickListener(v->{
+            requireActivity().getSupportFragmentManager().popBackStack();
+        });
         btn_cate_tech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

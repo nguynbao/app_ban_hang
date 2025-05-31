@@ -20,24 +20,24 @@ public class productDao {
     }
 
     @SuppressLint("Range")
-    public List<product> get (String sql, String ...selectArgs){
+    public List<product> get(String sql, String... selectArgs) {
         List<product> productList = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, selectArgs);
-        while (cursor.moveToNext()){
-            product product =  new product();
-            product.setProduct_id(cursor.getColumnIndexOrThrow("product_id"));
-            product.setCategory_id(cursor.getColumnIndexOrThrow("category_id"));
+        while (cursor.moveToNext()) {
+            product product = new product();
+            product.setProduct_id(cursor.getInt(cursor.getColumnIndexOrThrow("product_id")));
+            product.setCategory_id(cursor.getInt(cursor.getColumnIndexOrThrow("category_id")));
             product.setProduct_name(cursor.getString(cursor.getColumnIndexOrThrow("name")));
             product.setProduct_description(cursor.getString(cursor.getColumnIndexOrThrow("description")));
             product.setProduct_price(cursor.getFloat(cursor.getColumnIndexOrThrow("price")));
             product.setProduct_imgRes(cursor.getInt(cursor.getColumnIndexOrThrow("image_url")));
             productList.add(product);
         }
+        cursor.close(); // Đóng cursor để tránh rò rỉ bộ nhớ
         return productList;
     }
 
     // Lấy tất cả sản phẩm
-
     public List<product> getAll (){
         String sql = "SELECT * FROM products";
         return get(sql);

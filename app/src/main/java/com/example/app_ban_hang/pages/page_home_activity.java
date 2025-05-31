@@ -19,9 +19,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 public class page_home_activity extends AppCompatActivity {
     ViewPager2 viewPager;
     TabLayout tabLayout;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +33,7 @@ public class page_home_activity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager.setAdapter(new adapter_viewpages(this));
+        viewPager.setUserInputEnabled(false);
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> {
                     switch (position) {
