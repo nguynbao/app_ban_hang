@@ -1,9 +1,11 @@
 package com.example.app_ban_hang.pages;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class page_home_activity extends AppCompatActivity {
+    private AppCompatButton search;
     RecyclerView recyclerView, recyclerView2, recyclerView3;
     adapter_banner bannerAdapter;
     adapter_categories categoryAdapter;
@@ -104,6 +107,12 @@ public class page_home_activity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
+
+        search = findViewById(R.id.search);
+        search.setOnClickListener(v -> {
+            startActivity(new Intent(page_home_activity.this, page_search_activity.class));
+        });
+
 
     }
 }
