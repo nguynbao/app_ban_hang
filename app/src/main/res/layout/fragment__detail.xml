@@ -128,7 +128,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/addcart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -141,7 +141,7 @@
         app:layout_constraintVertical_bias="0.32999998" />
 
     <TextView
-        android:id="@+id/buy"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_round_white"

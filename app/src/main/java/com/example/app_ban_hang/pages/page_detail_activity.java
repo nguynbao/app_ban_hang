@@ -9,6 +9,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ public class page_detail_activity extends AppCompatActivity {
     private ImageView productImgRes;
     private TextView productName;
     private TextView productPrice;
-    private TextView buy;
+    private ImageButton addcart;
 
     private int imgRes;
 
@@ -37,7 +38,7 @@ public class page_detail_activity extends AppCompatActivity {
         productImgRes = findViewById(R.id.detail_image);
         productName = findViewById(R.id.detail_name);
         productPrice = findViewById(R.id.detail_price);
-        buy = findViewById(R.id.buy);
+        addcart = findViewById(R.id.addcart);
         Intent intent = getIntent();
         if (intent != null) {
             imgRes  = intent.getIntExtra("product_imgRes", 0);
@@ -48,7 +49,7 @@ public class page_detail_activity extends AppCompatActivity {
             this.productName.setText(productName);
             this.productPrice.setText(String.format("%.2f", productPrice));  // Hiển thị 2 chữ số thập phân
         }
-        buy.setOnClickListener(v -> {
+        addcart.setOnClickListener(v -> {
             Intent intent1 = new Intent(page_detail_activity.this, page_cart_activity.class);
 
             intent1.putExtra("product_name", productName.getText().toString());
