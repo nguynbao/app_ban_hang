@@ -9,6 +9,7 @@ public class product {
     private String product_description;
     private float product_price;
     private int product_imgRes;
+    private int quantity;
 
     public product(){}
 
@@ -71,4 +72,12 @@ public class product {
     public void setProduct_price(float product_price) {
         this.product_price = product_price;
     }
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 }
