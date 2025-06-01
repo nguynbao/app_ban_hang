@@ -53,7 +53,6 @@ public class productDao {
     // Thêm sản phẩm mới
     public long insert(product product){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("product_id", product.getProduct_id());
         contentValues.put("category_id", product.getCategory_id());
         contentValues.put("name", product.getProduct_name());
         contentValues.put("description", product.getProduct_description());

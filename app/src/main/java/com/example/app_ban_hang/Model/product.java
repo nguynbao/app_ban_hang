@@ -12,8 +12,7 @@ public class product {
 
     public product(){}
 
-    public product(int product_id,int category_id, String product_name, String product_description, int product_price, int product_imgRes) {
-        this.product_id = product_id;
+    public product(int category_id, String product_name, String product_description, float product_price, int product_imgRes) {
         this.category_id = category_id;
         this.product_name = product_name;
         this.product_description = product_description;

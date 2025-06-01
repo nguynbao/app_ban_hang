@@ -1,34 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<group android:checkableBehavior="single">
+
     <item android:id="@+id/nav_Dashboard"
         android:title="Danh thu"/>
-    <item android:id="@+id/nav_cate"
-        android:title="Danh mục">
-        <menu>
-            <item android:id="@+id/nav_cate_add"
-                android:title="Thêm danh mục"/>
-            <item android:id="@+id/nav_cate_all"
-                android:title="Tất cả danh mục"/>
 
-        </menu>
-    </item>
-    <item android:id="@+id/nav_product"
-        android:title="Sản phẩm">
-        <menu>
-            <item android:id="@+id/nav_product_add"
-                android:title="Thêm sản phẩm"/>
-            <item android:id="@+id/nav_product_all"
-                android:title="Tất cả sản phẩm"/>
-        </menu>
-    </item>
-    <item android:id="@+id/nav_users"
-        android:title="Người dung">
-        <menu>
-            <item android:id="@+id/nav_users_add"
-                android:title="Thêm người dùng"/>
-            <item android:id="@+id/nav_users_all"
-                android:title="Tât cả người dùng"/>
-        </menu>
-    </item>
-</group>
+    <group android:id="@+id/group_cate" android:checkableBehavior="none">
+        <item android:title="Danh mục"></item>
+        <item android:id="@+id/nav_cate_add" android:title="Thêm danh mục"/>
+        <item android:id="@+id/nav_cate_all" android:title="Tất cả danh mục"/>
+    </group>
+
+    <group android:id="@+id/group_product" android:checkableBehavior="none">
+        <item android:title="Sản phẩm"></item>
+        <item android:id="@+id/nav_product_add" android:title="Thêm sản phẩm"/>
+        <item android:id="@+id/nav_product_all" android:title="Tất cả sản phẩm"/>
+    </group>
+
+    <group android:id="@+id/group_user" android:checkableBehavior="none">
+        <item android:title="Người dung"></item>
+        <item android:id="@+id/nav_users_add"
+            android:title="Thêm người dùng"/>
+        <item android:id="@+id/nav_users_all"
+            android:title="Tât cả người dùng"/>
+    </group>
+
 </menu>

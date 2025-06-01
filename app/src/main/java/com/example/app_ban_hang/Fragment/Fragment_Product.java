@@ -42,28 +42,9 @@ public class Fragment_Product extends Fragment {
         // Dùng GridLayoutManager với 2 cột
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2); // 2 cột
         recycler_Product.setLayoutManager(layoutManager);
-        productList.add(new product(1, 4, "Loa JBL", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeakeer));
-        productList.add(new product(2, 4, "Loa Gojodo", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeaker1));
-        productList.add(new product(3, 4, "Loa Kẹo Kéo", "Sản phẩm đỉnh", 5500, R.drawable.product_loudspeaker2));
-        productList.add(new product(4, 1, "Giày tây", "Sản phẩm đỉnh", 150, R.drawable.product_shoe1));
-        productList.add(new product(5, 1, "Giày bata", "Sản phẩm đỉnh", 250, R.drawable.product_shoe2));
-        productList.add(new product(6, 2, "Áo VECTOR", "Sản phẩm đỉnh", 150, R.drawable.product_tee1));
-        productList.add(new product(7, 2, "DanhVector", "Sản phẩm đỉnh", 250, R.drawable.product_tee2));
-        productList.add(new product(8, 3, "Dụng cụ ăn uống1", "Sản phẩm đỉnh", 150, R.drawable.product_eat1));
-        productList.add(new product(9, 3, "Dụng cụ ăn uống2", "Sản phẩm đỉnh", 250, R.drawable.product_eat2));
-        productList.add(new product(10, 5, "Dây chuyền 1", "Sản phẩm đỉnh", 150, R.drawable.product_accessories1));
-        productList.add(new product(11, 5, "Dây chuyền 2", "Sản phẩm đỉnh", 250, R.drawable.product_accessories2));
-        productList.add(new product(12, 6, "Son môi", "Sản phẩm đỉnh", 150, R.drawable.product_comestics1));
-        productList.add(new product(13, 6, "Trang điểm", "Sản phẩm đỉnh", 250, R.drawable.product_comestics2));
         productDao productDao = new productDao(getContext());
-        for (product product : productList) {
-            productDao.insert(product);
-        }
 
         List<product> test = productDao.getAll();
-        for (product product : test) {
-            Log.d("Testproduct",product.getProduct_name());
-        }
         //Lấy bundle từ categories
         Bundle bundle = getArguments();
         List<product> filter_cateID = null;
