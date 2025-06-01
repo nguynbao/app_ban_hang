@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
-import com.example.app_ban_hang.database.productDao;
+import com.example.app_ban_hang.database.ProductDao;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class adapter_admin_product extends RecyclerView.Adapter<adapter_admin_pr
         holder.btn_delte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                productDao productDao = new productDao(view.getContext());
+                ProductDao productDao = new ProductDao(view.getContext());
                 productDao.delete(String.valueOf(product.getProduct_id()));
                 productList.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();

@@ -15,10 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.adapter.adapter_banner;
 import com.example.app_ban_hang.adapter.adapter_categories;
 import com.example.app_ban_hang.adapter.adapter_product;
+import com.example.app_ban_hang.database.ProductDao;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,9 +67,11 @@ public class Fragment_home extends Fragment {
         recyclerViewCategory.setAdapter(new adapter_categories(categories));
 
         // Products
-        List<Integer> products = Arrays.asList(
-                R.drawable.product_one, R.drawable.product_one, R.drawable.product_one, R.drawable.product_one
-        );
+        ProductDao ProductDao = new ProductDao(requireContext());
+        List<product> products = ProductDao.getAll();
+        if (products.size() > 5) {
+            products = products.subList(0, 5);
+        }
         recyclerViewProduct.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewProduct.setAdapter(new adapter_product(products));
     }

@@ -11,10 +11,10 @@ import com.example.app_ban_hang.Model.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class productDao {
+public class ProductDao {
     private SQLiteDatabase db;
 
-    public productDao(Context context) {
+    public ProductDao(Context context) {
         database dbhelper = new database(context);
         db = dbhelper.getWritableDatabase();
     }

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
-import com.example.app_ban_hang.database.productDao;
+import com.example.app_ban_hang.database.ProductDao;
 
 public class Fragment_Admin_AddProduct extends Fragment {
 
@@ -45,7 +45,7 @@ public class Fragment_Admin_AddProduct extends Fragment {
                 float Price = Float.parseFloat(edt_price.getText().toString());
                 int product_imgRes = R.drawable.product_tee1;
                 product product = new product(cate_ID, productName, productDesc, Price, product_imgRes);
-                productDao productDao = new productDao(getContext());
+                ProductDao productDao = new ProductDao(getContext());
                 long status = productDao.insert(product);
                 if (status != 1){
                     Toast.makeText(getContext(), "Thêm Thành Công", Toast.LENGTH_SHORT).show();
