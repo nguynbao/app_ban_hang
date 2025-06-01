@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_ban_hang.Fragment.Fragment_Detail;
+import com.example.app_ban_hang.pages.page_detail_activity;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 
@@ -39,7 +39,7 @@ public class adapter_product extends RecyclerView.Adapter<adapter_product.ViewHo
         holder.productPrice.setText(String.valueOf(currentProduct.getProduct_price()));
         holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
-            Intent intent = new Intent(context, Fragment_Detail.class);
+            Intent intent = new Intent(context, page_detail_activity.class);
             intent.putExtra("product_name", currentProduct.getProduct_name());
             intent.putExtra("product_price", currentProduct.getProduct_price());
             intent.putExtra("product_imgRes", currentProduct.getProduct_imgRes());
