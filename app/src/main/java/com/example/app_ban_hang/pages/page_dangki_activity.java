@@ -1,7 +1,10 @@
 package com.example.app_ban_hang.pages;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,14 +15,24 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 
+import com.example.app_ban_hang.API.ApiClient;
+import com.example.app_ban_hang.API.ProvinceApi;
+import com.example.app_ban_hang.Model.Province;
 import com.example.app_ban_hang.Model.users;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.UserDAO;
 import com.example.app_ban_hang.database.database;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class page_dangki_activity extends AppCompatActivity {
     private AppCompatButton dangki;
     private EditText phone, email, pass, ten, city;
+    private Spinner spinner_City;
     UserDAO userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +50,36 @@ public class page_dangki_activity extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
-        city = findViewById(R.id.diachi);
+        spinner_City = findViewById(R.id.spinner_City);
+
+        ProvinceApi api = ApiClient.getClient().create(ProvinceApi.class);
+        api.getProvinces().enqueue(new Callback<List<Province>>() {
+            @Override
+            public void onResponse(Call<List<Province>> call, Response<List<Province>> response) {
+                Log.d("API", "onResponse called");
+                if (response.isSuccessful()){
+                    Log.d("API", "SUCCESS, size = " + response.body().size());
+                    List<Province> provinceList = response.body();
+                    ArrayAdapter<Province> adapter = new ArrayAdapter<>(
+                            page_dangki_activity.this,
+                            android.R.layout.simple_spinner_item,
+                            provinceList
+                    );
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_City.setAdapter(adapter);
+                }else {
+                    Log.d("API", "Response failed or empty body, code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Province>> call, Throwable t) {
+                Log.d("API", "onFailure called: " + t.getMessage());
+                Toast.makeText(page_dangki_activity.this, "Lỗi kết nối API", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         dangki.setOnClickListener(v -> {
             registerUser();
         });
@@ -47,7 +89,7 @@ public class page_dangki_activity extends AppCompatActivity {
         String inputemail = email.getText().toString().trim();
         String password = pass.getText().toString().trim();
         String phoneStr = phone.getText().toString().trim();
-        String address = city.getText().toString().trim();
+        String address = spinner_City.getSelectedItem().toString();
 
         // Validate
         if (name.isEmpty() || inputemail.isEmpty() || password.isEmpty()) {

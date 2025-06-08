@@ -61,14 +61,12 @@
                 android:inputType="textPassword"
                 android:layout_marginBottom="20dp"
                 android:hint="Password"/>
-            <EditText
-                android:id="@+id/diachi"
+
+            <Spinner
+                android:id="@+id/spinner_City"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:background="@drawable/edt_round_pre"
-                android:inputType="textAutoComplete"
-                android:hint="thành phố"/>
+                android:layout_height="47dp"
+                android:background="@drawable/edt_round_pre"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/dangki"
