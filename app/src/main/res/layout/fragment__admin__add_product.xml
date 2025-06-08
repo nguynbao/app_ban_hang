@@ -27,17 +27,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" >
 
-        <EditText
+        <Spinner
             android:id="@+id/edt_cateID"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="15dp"
-            android:background="@drawable/edt_underline"
-            android:hint="Danh mục sản phẩm"
-            android:textColor="@color/black"
-            android:padding="15dp"
-            android:inputType="number"
-            android:textColorHint="@color/gray" />
+            android:background="@drawable/btn_round_red"
+            android:padding="15dp" />
 
         <EditText
             android:id="@+id/edt_productName"
@@ -61,7 +57,7 @@
             android:textColor="@color/black"
             android:background="@drawable/edt_underline" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btn_imgRes"
             android:layout_width="130dp"
             android:layout_height="130dp"

@@ -48,7 +48,7 @@ public class adapter_admin_product extends RecyclerView.Adapter<adapter_admin_pr
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
 
         product product = productList.get(position);
-        holder.product_img.setImageResource(product.getProduct_imgRes());
+        holder.product_img.setImageURI(product.getProduct_imgRes());
         holder.product_name.setText(product.getProduct_name());
         holder.product_price.setText(String.valueOf(product.getProduct_price()));
         holder.btn_delte.setOnClickListener(new View.OnClickListener() {

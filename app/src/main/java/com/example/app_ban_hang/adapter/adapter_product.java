@@ -34,7 +34,7 @@ public class adapter_product extends RecyclerView.Adapter<adapter_product.ViewHo
     @Override
     public void onBindViewHolder(@NonNull adapter_product.ViewHolder holder, int position) {
         product currentProduct = productList.get(position);
-        holder.productImage.setImageResource(currentProduct.getProduct_imgRes());
+        holder.productImage.setImageURI(currentProduct.getProduct_imgRes());
         holder.productName.setText(currentProduct.getProduct_name());
         holder.productPrice.setText(String.valueOf(currentProduct.getProduct_price()));
         holder.itemView.setOnClickListener(v -> {

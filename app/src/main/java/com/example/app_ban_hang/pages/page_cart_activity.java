@@ -2,6 +2,7 @@
 package com.example.app_ban_hang.pages;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -33,14 +34,15 @@ public class page_cart_activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            int imgRes = intent.getIntExtra("product_imgRes", 0);
+            String imgResString = getIntent().getStringExtra("product_imgRes");
+            Uri imgRes = Uri.parse(imgResString);
             String name = intent.getStringExtra("product_name");
             float price = intent.getFloatExtra("product_price", 0.0f);
 
             Log.d("page_cart_activity", "Received product: " + name + ", price: " + price + ", imgRes: " + imgRes);
 
             int categoryId = 0;
-            if (name != null && imgRes != 0) {
+            if (name != null && imgRes != null) {
                 productList.add(new product(categoryId, name, "", price, imgRes));
             } else {
                 Log.d("page_cart_activity", "Product data incomplete.");

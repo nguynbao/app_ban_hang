@@ -1,5 +1,7 @@
 package com.example.app_ban_hang.Model;
 
+import android.net.Uri;
+
 import java.math.BigInteger;
 
 public class product {
@@ -8,12 +10,12 @@ public class product {
     private String product_name;
     private String product_description;
     private float product_price;
-    private int product_imgRes;
+    private Uri product_imgRes;
     private int quantity;
 
     public product(){}
 
-    public product(int category_id, String product_name, String product_description, float product_price, int product_imgRes) {
+    public product(int category_id, String product_name, String product_description, float product_price, Uri product_imgRes) {
         this.category_id = category_id;
         this.product_name = product_name;
         this.product_description = product_description;
@@ -53,11 +55,11 @@ public class product {
         this.product_price = product_price;
     }
 
-    public int getProduct_imgRes() {
+    public Uri getProduct_imgRes() {
         return product_imgRes;
     }
 
-    public void setProduct_imgRes(int product_imgRes) {
+    public void setProduct_imgRes(Uri product_imgRes) {
         this.product_imgRes = product_imgRes;
     }
 
