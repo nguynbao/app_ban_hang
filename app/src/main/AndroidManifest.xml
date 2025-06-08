@@ -13,6 +13,9 @@
         android:theme="@style/Theme.App_ban_hang"
         tools:targetApi="31">
         <activity
+            android:name=".pages_admin.page_admin_Edit_cate"
+            android:exported="false" />
+        <activity
             android:name=".pages.page_cart_activity"
             android:exported="false" />
         <activity

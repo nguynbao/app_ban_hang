@@ -28,14 +28,12 @@ public class Fragment_Admin_AllProduct extends Fragment {
         ProductDao productDao = new ProductDao(getContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2) ;
         recycler_ProductAll = view.findViewById(R.id.recycler_ProductAll);
-        recycler_ProductAll.setLayoutManager(gridLayoutManager );
+        recycler_ProductAll.setLayoutManager(gridLayoutManager);
         loadAdapter();
         return view;
     }
-
     @Override
     public void onResume(){
-
         super.onResume();
         loadAdapter();
     }
