@@ -14,6 +14,7 @@ import com.example.app_ban_hang.database.ProductDao;
 import com.example.app_ban_hang.R;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Fragment_Search extends Fragment {
     private AutoCompleteTextView search;
@@ -31,7 +32,7 @@ public class Fragment_Search extends Fragment {
         List<product> productList = productDao.getAll();
         List<String> productNames = productList.stream()
                 .map(product::getProduct_name)
-                .toList();
+                .collect(Collectors.toList());
         // Adapter cho AutoCompleteTextView
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getContext(),

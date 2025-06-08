@@ -4,6 +4,7 @@ package com.example.app_ban_hang.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_ban_hang.Model.categories;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.adapter.adapter_banner;
 import com.example.app_ban_hang.adapter.adapter_categories;
 import com.example.app_ban_hang.adapter.adapter_product;
 import com.example.app_ban_hang.database.ProductDao;
+import com.example.app_ban_hang.database.CategoryDao;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,13 +62,12 @@ public class Fragment_home extends Fragment {
         recyclerViewBanner.setAdapter(new adapter_banner(banners));
 
         // Categories
-        List<Integer> categories = Arrays.asList(
-                R.drawable.cate_headphone, R.drawable.cate_headphone, R.drawable.cate_headphone,
-                R.drawable.cate_headphone, R.drawable.cate_headphone, R.drawable.cate_headphone,
-                R.drawable.cate_headphone
-        );
+        CategoryDao categoriesDao = new CategoryDao(requireContext());
+        List<categories> categories = categoriesDao.getAllCategories();
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewCategory.setAdapter(new adapter_categories(categories));
+        Log.d("CategoriesFragment", "Số danh mục: " + categories.size());
+
 
         // Products
         ProductDao ProductDao = new ProductDao(requireContext());
@@ -77,8 +80,13 @@ public class Fragment_home extends Fragment {
     }
 
     private void setupSearchButton() {
-        searchButton.setOnClickListener(v ->
-                startActivity(new Intent(requireContext(), Fragment_Search.class))
-        );
+        searchButton.setOnClickListener(v -> {
+            Fragment_Search fragmentSearch = new Fragment_Search();
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main, fragmentSearch)  // R.id.fragment_container là ID của FrameLayout trong MainActivity
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 }
