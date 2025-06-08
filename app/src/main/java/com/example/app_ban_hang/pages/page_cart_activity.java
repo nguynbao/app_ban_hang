@@ -35,7 +35,10 @@ public class page_cart_activity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String imgResString = getIntent().getStringExtra("product_imgRes");
-            Uri imgRes = Uri.parse(imgResString);
+            Uri imgRes = null;
+            if (imgResString != null && !imgResString.isEmpty()) {
+                imgRes = Uri.parse(imgResString);
+            }
             String name = intent.getStringExtra("product_name");
             float price = intent.getFloatExtra("product_price", 0.0f);
 

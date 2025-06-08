@@ -141,20 +141,20 @@
         app:layout_constraintVertical_bias="0.32999998" />
 
     <TextView
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_round_white"
         android:backgroundTint="@color/main_color"
         android:padding="15dp"
         android:text="Mua Ngay"
-        android:textSize="35dp"
         android:textColor="@color/white"
+        android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton6"
+        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintStart_toEndOf="@+id/addcart"
         app:layout_constraintTop_toBottomOf="@+id/view2"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.306" />
 
     <View
         android:id="@+id/view4"
