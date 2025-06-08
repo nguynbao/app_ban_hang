@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.adapter.adapter_admin_product;
-import com.example.app_ban_hang.database.productDao;
+import com.example.app_ban_hang.database.ProductDao;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class Fragment_Admin_AllProduct extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment__admin_allproduct, container ,false);
-        productDao productDao = new productDao(getContext());
+        ProductDao productDao = new ProductDao(getContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2) ;
         recycler_ProductAll = view.findViewById(R.id.recycler_ProductAll);
         recycler_ProductAll.setLayoutManager(gridLayoutManager );
@@ -42,7 +41,7 @@ public class Fragment_Admin_AllProduct extends Fragment {
     }
 
     private void loadAdapter() {
-        productDao productDao = new productDao(getContext());
+        ProductDao productDao = new ProductDao(getContext());
         List<product> productList = productDao.getAll();
         adapter_admin_product adapter = new adapter_admin_product(productList);
         for (product product : productList) {

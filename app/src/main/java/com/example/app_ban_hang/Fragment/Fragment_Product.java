@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -16,7 +15,7 @@ import android.widget.ImageButton;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.adapter.adapter_product_overview;
-import com.example.app_ban_hang.database.productDao;
+import com.example.app_ban_hang.database.ProductDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,7 @@ public class Fragment_Product extends Fragment {
         // Dùng GridLayoutManager với 2 cột
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2); // 2 cột
         recycler_Product.setLayoutManager(layoutManager);
-        productDao productDao = new productDao(getContext());
+        ProductDao productDao = new ProductDao(getContext());
 
         List<product> test = productDao.getAll();
         //Lấy bundle từ categories
