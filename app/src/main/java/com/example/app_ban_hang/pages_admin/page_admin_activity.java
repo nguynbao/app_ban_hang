@@ -3,6 +3,7 @@ package com.example.app_ban_hang.pages_admin;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,6 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 
 
 public class page_admin_activity extends AppCompatActivity {
+    TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,12 @@ public class page_admin_activity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        name = findViewById(R.id.name);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ImageView openMenu = findViewById(R.id.open_menu);
         NavigationView navigation_view = findViewById(R.id.navigation_view);
         ViewPager2 viewPager = findViewById(R.id.viewPager);
-
+        viewPager.setUserInputEnabled(false);
         viewPager.setAdapter(new adapter_viewpagerAdmin(page_admin_activity.this));
 
         openMenu.setOnClickListener(v -> {
@@ -58,13 +61,18 @@ public class page_admin_activity extends AppCompatActivity {
                 if (id == R.id.nav_Dashboard) {
                     viewPager.setCurrentItem(0);// danh thu
                 } else if (id == R.id.nav_cate_add) {
-                    viewPager.setCurrentItem(1);// thêm danh mục
+                    viewPager.setCurrentItem(1);
+                    name.setText("Danh mục");// thêm danh mục
                 } else if (id == R.id.nav_cate_all) {
-                    viewPager.setCurrentItem(2);// tất cả danh mục
+                    viewPager.setCurrentItem(2);
+                    name.setText("Danh mục");// danh mục
+                    // tất cả danh mục
                 } else if (id == R.id.nav_product_add) {
-                    viewPager.setCurrentItem(3);// thêm sản phẩm
+                    viewPager.setCurrentItem(3);
+                    name.setText("Sản phẩm");// thêm sản phẩm
                 } else if (id == R.id.nav_product_all) {
                     viewPager.setCurrentItem(4);
+                    name.setText("Sản phẩm");
                 } else if (id == R.id.nav_users_add) {
                     viewPager.setCurrentItem(5);// thêm người dùng
                 }else if (id == R.id.nav_users_all) {
