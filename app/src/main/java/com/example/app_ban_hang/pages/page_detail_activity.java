@@ -55,7 +55,7 @@ public class page_detail_activity extends AppCompatActivity {
         Log.d("productId", String.valueOf(productId));
         ProductDao productDao = new ProductDao(this);
         product product = productDao.getById(String.valueOf(productId));
-        productImgRes.setImageResource(product.getProduct_imgRes());
+        productImgRes.setImageURI(product.getProduct_imgRes());
         productName.setText(product.getProduct_name());
         productPrice.setText(String.valueOf(product.getProduct_price()));
 
