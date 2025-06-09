@@ -2,6 +2,7 @@
 package com.example.app_ban_hang.pages;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -9,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_ban_hang.Model.CartItem;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.adapter.adapter_cart;
+import com.example.app_ban_hang.database.CartDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,7 @@ import java.util.List;
 public class page_cart_activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private adapter_cart adapterCart;
-    private List<product> productList;
+    private List<CartItem> cartItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +31,15 @@ public class page_cart_activity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewCart);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        productList = new ArrayList<>();
-
-        Intent intent = getIntent();
-        if (intent != null) {
-            int imgRes = intent.getIntExtra("product_imgRes", 0);
-            String name = intent.getStringExtra("product_name");
-            float price = intent.getFloatExtra("product_price", 0.0f);
-
-            Log.d("page_cart_activity", "Received product: " + name + ", price: " + price + ", imgRes: " + imgRes);
-
-            int categoryId = 0;
-            if (name != null && imgRes != 0) {
-                productList.add(new product(categoryId, name, "", price, imgRes));
-            } else {
-                Log.d("page_cart_activity", "Product data incomplete.");
-            }
-        } else {
-            Log.d("page_cart_activity", "Intent is null");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+        int userID = sharedPreferences.getInt("user_id", -1); // -1 là giá trị mặc định nếu không có
+        Log.d("USERIID", String.valueOf(userID));
+        CartDao cartDao = new CartDao(this);
+        cartItemList = cartDao.getItemIdUser(String.valueOf(userID));
+        for (CartItem cartItem : cartItemList){
+            Log.d("GetAll", String.valueOf(cartItem.getCart_id()));
         }
-
-        adapterCart = new adapter_cart(productList);
+        adapterCart = new adapter_cart(cartItemList);
         recyclerView.setAdapter(adapterCart);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapterCart.notifyDataSetChanged();
     }
 }

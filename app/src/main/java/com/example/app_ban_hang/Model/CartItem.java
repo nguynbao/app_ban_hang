@@ -38,10 +38,10 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public CartItem(int cart_id, int user_id, int product_id, int quantity) {
-        this.cart_id = cart_id;
+    public CartItem(int user_id, int product_id, int quantity) {
         this.user_id = user_id;
         this.product_id = product_id;
         this.quantity = quantity;
     }
+    public CartItem(){}
 }

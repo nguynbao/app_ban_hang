@@ -1,89 +1,77 @@
 package com.example.app_ban_hang.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.app_ban_hang.Model.CartItem;
+import com.example.app_ban_hang.Model.product;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartDao {
     private SQLiteDatabase db;
-
-    public CartDao(Context context) {
+    public CartDao(Context context){
         database dbHelper = new database(context);
         db = dbHelper.getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys=ON;");
+    }
+    @SuppressLint("Range")
+    public List<CartItem> get(String sql, String... selectArgs){
+        List<CartItem> cartItemList = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql, selectArgs);
+        while (cursor.moveToNext()){
+            CartItem cartItem = new CartItem();
+            cartItem.setCart_id(cursor.getInt(cursor.getColumnIndexOrThrow("cart_item_id")));
+            cartItem.setUser_id(cursor.getInt(cursor.getColumnIndexOrThrow("user_id")));
+            cartItem.setQuantity(cursor.getInt(cursor.getColumnIndexOrThrow("quantity")));
+            cartItem.setProduct_id(cursor.getInt(cursor.getColumnIndexOrThrow("product_id")));
+            cartItemList.add(cartItem);
+        }
+        cursor.close();
+        return cartItemList;
     }
 
-    // Thêm sản phẩm vào giỏ hàng
-    public long insert(CartItem cartItem) {
-        ContentValues values = new ContentValues();
-        values.put("user_id", cartItem.getUser_id());
-        values.put("product_id", cartItem.getProduct_id());
-        values.put("quantity", cartItem.getQuantity());
-        return db.insert("cart_items", null, values);
+    // Lấy tất cả item trong giỏ hàng
+    public List<CartItem> getAll (){
+        String sql = "SELECT * FROM cart_items";
+        return get(sql);
     }
 
-    // Cập nhật số lượng sản phẩm trong giỏ hàng
-    public int update(CartItem cartItem) {
-        ContentValues values = new ContentValues();
-        values.put("quantity", cartItem.getQuantity());
-        return db.update(
-                "cart_items",
-                values,
-                "cart_id = ?",
-                new String[]{String.valueOf(cartItem.getCart_id())}
-        );
-    }
-
-    // Xóa sản phẩm khỏi giỏ hàng
-    public int delete(int cart_id) {
-        return db.delete(
-                "cart_items",
-                "cart_id = ?",
-                new String[]{String.valueOf(cart_id)}
-        );
-    }
-
-    // Lấy danh sách giỏ hàng của người dùng cụ thể
-    public List<CartItem> getCartItemsByUser(int user_id) {
-        List<CartItem> cartItems = new ArrayList<>();
+    // Lấy tất cả item theo idUser
+    public List<CartItem> getItemIdUser (String UserID){
         String sql = "SELECT * FROM cart_items WHERE user_id = ?";
-        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(user_id)});
-        if (cursor.moveToFirst()) {
-            do {
-                int cartId = cursor.getInt(cursor.getColumnIndexOrThrow("cart_id"));
-                int productId = cursor.getInt(cursor.getColumnIndexOrThrow("product_id"));
-                int quantity = cursor.getInt(cursor.getColumnIndexOrThrow("quantity"));
-                CartItem item = new CartItem(cartId, user_id, productId, quantity);
-                cartItems.add(item);
-            } while (cursor.moveToNext());
+        return get(sql, UserID);
+    }
+    //Lấy item theo productID
+    public CartItem getItemIdProduct(String productID){
+        String sql = "SELECT * FROM cart_items WHERE product_id = ?";
+        List<CartItem> cartItemList = get(sql, productID);
+        CartItem cartItem = new CartItem();
+        if (cartItemList.size() > 0){
+            cartItem = cartItemList.get(0);
         }
-        cursor.close();
-        return cartItems;
+        return  cartItem;
+    }
+    // Thêm item vào giỏ hàng
+    public long insert(CartItem cartItem){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("user_id", cartItem.getUser_id());
+        contentValues.put("product_id", cartItem.getProduct_id());
+        contentValues.put("quantity", cartItem.getQuantity());
+
+        return db.insert("cart_items", null, contentValues);
     }
 
-    // Xóa toàn bộ giỏ hàng của người dùng
-    public int clearCartByUser(int user_id) {
-        return db.delete(
-                "cart_items",
-                "user_id = ?",
-                new String[]{String.valueOf(user_id)}
-        );
+    // Tăng giảm quantity sản phẩm
+    public int updateQuantity(int Quantity, int cartID){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("quantity", Quantity);
+
+        return db.update("cart_items", contentValues, "cart_item_id = ?", new String[]{String.valueOf(cartID)});
     }
 
-    // Tính tổng số lượng sản phẩm trong giỏ hàng
-    public int getTotalQuantity(int user_id) {
-        int total = 0;
-        String sql = "SELECT SUM(quantity) as total_quantity FROM cart_items WHERE user_id = ?";
-        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(user_id)});
-        if (cursor.moveToFirst()) {
-            total = cursor.getInt(cursor.getColumnIndexOrThrow("total_quantity"));
-        }
-        cursor.close();
-        return total;
-    }
 }

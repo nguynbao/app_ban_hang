@@ -1,8 +1,11 @@
 package com.example.app_ban_hang.adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
+import com.example.app_ban_hang.pages.page_detail_activity;
 
 import java.sql.Array;
 import java.util.List;
@@ -26,11 +30,13 @@ public class adapter_product_overview extends RecyclerView.Adapter<adapter_produ
     public class productOverViewViewHolder extends RecyclerView.ViewHolder {
         ImageView product_img;
         TextView product_name, product_price;
+        Button btn_Detail;
         public productOverViewViewHolder(@NonNull View itemView) {
             super(itemView);
             product_img = itemView.findViewById(R.id.product_img);
             product_name = itemView.findViewById(R.id.product_name);
             product_price = itemView.findViewById(R.id.product_price);
+            btn_Detail = itemView.findViewById(R.id.btn_Detail);
 
         }
     }
@@ -49,6 +55,16 @@ public class adapter_product_overview extends RecyclerView.Adapter<adapter_produ
         holder.product_img.setImageResource(product.getProduct_imgRes());
         holder.product_name.setText(product.getProduct_name());
         holder.product_price.setText(String.valueOf(product.getProduct_price()));
+        holder.btn_Detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), page_detail_activity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("intID", product.getProduct_id());
+                intent.putExtras(bundle);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -50,6 +50,16 @@ public class ProductDao {
         return productList;
     }
 
+    // Lấy sản phẩm theo ID category
+    public product getById(String id){
+        String sql = "SELECT * FROM products WHERE product_id = ?";
+        List<product> productList = get(sql, id);
+        if(productList.size()>0){
+            return productList.get(0);
+        }
+        return null;
+    }
+
     // Thêm sản phẩm mới
     public long insert(product product){
         ContentValues contentValues = new ContentValues();
