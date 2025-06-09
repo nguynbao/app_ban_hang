@@ -1,5 +1,6 @@
 package com.example.app_ban_hang.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.ProductDao;
@@ -23,7 +25,7 @@ public class adapter_admin_product extends RecyclerView.Adapter<adapter_admin_pr
         this.productList = productList;
     }
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView product_img;
         TextView product_name, product_price;
         Button btn_delte;
@@ -46,9 +48,13 @@ public class adapter_admin_product extends RecyclerView.Adapter<adapter_admin_pr
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-
         product product = productList.get(position);
-        holder.product_img.setImageResource(product.getProduct_imgRes());
+        Uri imgPath = product.getProduct_imgRes();
+        Glide.with(holder.product_img.getContext())
+                .load(imgPath)  // Glide hỗ trợ String path hoặc Uri object
+//                .placeholder(R.drawable.default_image) // Ảnh hiện khi đang load
+//                .error(R.drawable.default_image)       // Ảnh hiện khi load lỗi
+                .into(holder.product_img);
         holder.product_name.setText(product.getProduct_name());
         holder.product_price.setText(String.valueOf(product.getProduct_price()));
         holder.btn_delte.setOnClickListener(new View.OnClickListener() {

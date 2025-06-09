@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 
 import com.example.app_ban_hang.Model.product;
 
@@ -30,7 +31,8 @@ public class ProductDao {
             product.setProduct_name(cursor.getString(cursor.getColumnIndexOrThrow("name")));
             product.setProduct_description(cursor.getString(cursor.getColumnIndexOrThrow("description")));
             product.setProduct_price(cursor.getFloat(cursor.getColumnIndexOrThrow("price")));
-            product.setProduct_imgRes(cursor.getInt(cursor.getColumnIndexOrThrow("image_url")));
+            String imageUriString = cursor.getString(cursor.getColumnIndexOrThrow("image_url"));
+            product.setProduct_imgRes(Uri.parse(imageUriString));
             productList.add(product);
         }
         cursor.close(); // Đóng cursor để tránh rò rỉ bộ nhớ
@@ -67,7 +69,8 @@ public class ProductDao {
         contentValues.put("name", product.getProduct_name());
         contentValues.put("description", product.getProduct_description());
         contentValues.put("price", product.getProduct_price());
-        contentValues.put("image_url", product.getProduct_imgRes());
+        contentValues.put("image_url", product.getProduct_imgRes().toString());
+
 
         return db.insert("products", null, contentValues);
     }

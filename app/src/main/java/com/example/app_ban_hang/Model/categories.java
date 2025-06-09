@@ -5,11 +5,18 @@ public class categories {
     private String category_name;
     private int category_imgRes;
 
-    public categories(String category_name, int category_id, int category_imgRes) {
-        this.category_name = category_name;
+    public categories(int category_id,String category_name,  int category_imgRes) {
         this.category_id = category_id;
+        this.category_name = category_name;
         this.category_imgRes = category_imgRes;
     }
+    public categories(String category_name,  int category_imgRes) {
+        this.category_name = category_name;
+        this.category_imgRes = category_imgRes;
+    }
+    public categories() {
+    }
+
 
     public int getCategory_id() {
         return category_id;
