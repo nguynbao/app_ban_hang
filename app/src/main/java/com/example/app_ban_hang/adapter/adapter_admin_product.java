@@ -1,6 +1,7 @@
 package com.example.app_ban_hang.adapter;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,6 @@ public class adapter_admin_product extends RecyclerView.Adapter<adapter_admin_pr
 
         }
     }
-
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,12 +49,13 @@ public class adapter_admin_product extends RecyclerView.Adapter<adapter_admin_pr
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         product product = productList.get(position);
-        Uri imgPath = product.getProduct_imgRes();
+        String imgPath = product.getProduct_imgRes();
         Glide.with(holder.product_img.getContext())
-                .load(imgPath)  // Glide hỗ trợ String path hoặc Uri object
+                .load(imgPath)
 //                .placeholder(R.drawable.default_image) // Ảnh hiện khi đang load
 //                .error(R.drawable.default_image)       // Ảnh hiện khi load lỗi
                 .into(holder.product_img);
+        Log.d("FragmentAdmin", "Selected Image URI: " + imgPath.toString());
         holder.product_name.setText(product.getProduct_name());
         holder.product_price.setText(String.valueOf(product.getProduct_price()));
         holder.btn_delte.setOnClickListener(new View.OnClickListener() {

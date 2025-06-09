@@ -2,16 +2,22 @@ package com.example.app_ban_hang.Fragment;
 
 
 
-import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,11 +40,25 @@ public class Fragment_home extends Fragment {
     private AppCompatButton searchButton;
     public Fragment_home() {
     }
+    private ActivityResultLauncher<String> requestPermissionLauncher;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Khởi tạo launcher xin quyền
+        requestPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        // Được quyền, load dữ liệu hình ảnh ở đây hoặc gọi lại setupRecyclerViews()
+                        setupRecyclerViews();
+                    } else {
+                        // Không được cấp quyền, thông báo hoặc xử lý khác
+                        Toast.makeText(requireContext(), "Permission denied to read storage", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
     @Override
@@ -48,10 +68,28 @@ public class Fragment_home extends Fragment {
         recyclerViewCategory = view.findViewById(R.id.rcv2);
         recyclerViewProduct = view.findViewById(R.id.rcv3);
         searchButton = view.findViewById(R.id.search);
-        setupRecyclerViews();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_IMAGES)
+                    == PackageManager.PERMISSION_GRANTED) {
+                setupRecyclerViews();
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
+            }
+        } else { // Android dưới 13
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                setupRecyclerViews();
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+            }
+        }
+
         setupSearchButton();
         return view;
     }
+
+
     private void setupRecyclerViews() {
         // Banner
         List<Integer> banners = Arrays.asList(

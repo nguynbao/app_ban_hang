@@ -1,5 +1,6 @@
 package com.example.app_ban_hang.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.app_ban_hang.Model.CartItem;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
@@ -61,7 +63,13 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
         CartItem cartItem = cartItemList.get(position);
         ProductDao productDao = new ProductDao(holder.itemView.getContext());
         product product = productDao.getById(String.valueOf(cartItem.getProduct_id()));
-        holder.productImage.setImageURI(product.getProduct_imgRes());
+        String imageUri = product.getProduct_imgRes(); // hoặc String imagePath
+
+        Glide.with(holder.itemView.getContext())
+                .load(imageUri) // Glide hỗ trợ load URI, path, URL...
+//                .placeholder(R.drawable.placeholder_image) // ảnh chờ load
+//                .error(R.drawable.error_image) // ảnh lỗi
+                .into(holder.productImage);
         holder.productName.setText(product.getProduct_name());
         holder.productPrice.setText(String.valueOf(product.getProduct_price()));
         holder.txtQuantity.setText(String.valueOf(cartItem.getQuantity()));
