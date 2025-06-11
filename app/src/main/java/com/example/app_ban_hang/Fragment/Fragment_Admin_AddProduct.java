@@ -46,7 +46,6 @@ public class Fragment_Admin_AddProduct extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__admin__add_product, container, false);
-
         edt_productName = view.findViewById(R.id.edt_productName);
         edt_price = view.findViewById(R.id.edt_price);
         edt_Desc = view.findViewById(R.id.edt_Desc);
@@ -111,10 +110,10 @@ public class Fragment_Admin_AddProduct extends Fragment {
             List<String> categoryNames = categoryDao.getAllCategoryNames();
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     getContext(),
-                    android.R.layout.simple_spinner_item,
+                    R.layout.spinner_selected_item,
                     categoryNames
             );
-            adapter.setDropDownViewResource(R.layout.item_spinner);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner_cateID.setAdapter(adapter);
         }
     }

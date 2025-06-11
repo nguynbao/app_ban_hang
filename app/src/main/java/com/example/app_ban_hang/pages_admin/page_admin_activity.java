@@ -75,8 +75,10 @@ public class page_admin_activity extends AppCompatActivity {
                     name.setText("Sản phẩm");
                 } else if (id == R.id.nav_users_add) {
                     viewPager.setCurrentItem(5);// thêm người dùng
+                    name.setText("Người dùng");
                 }else if (id == R.id.nav_users_all) {
                     viewPager.setCurrentItem(6);// tất cả người dùng
+                    name.setText("Người dùng");
                 }
                 return true;
             }
