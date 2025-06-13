@@ -1,6 +1,7 @@
 package com.example.app_ban_hang.adapter;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,16 +52,18 @@ public class adapter_product_overview extends RecyclerView.Adapter<adapter_produ
 
     @Override
     public void onBindViewHolder(@NonNull productOverViewViewHolder holder, int position) {
-        product product = productList.get(position);
-        holder.product_img.setImageURI(product.getProduct_imgRes());
-        holder.product_name.setText(product.getProduct_name());
-        holder.product_price.setText(String.valueOf(product.getProduct_price()));
+        product currentProduct  = productList.get(position);
+        String imgRes = currentProduct.getProduct_imgRes();
+        if (imgRes != null && !imgRes.isEmpty()) {
+            holder.product_img.setImageURI(Uri.parse(imgRes));}
+        holder.product_name.setText(currentProduct.getProduct_name());
+        holder.product_price.setText(String.format("%.2f", currentProduct.getProduct_price()));
         holder.btn_Detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), page_detail_activity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("intID", product.getProduct_id());
+                bundle.putInt("intID", currentProduct.getProduct_id());
                 intent.putExtras(bundle);
                 holder.itemView.getContext().startActivity(intent);
             }

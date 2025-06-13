@@ -51,7 +51,6 @@ public class page_dangki_activity extends AppCompatActivity {
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         spinner_City = findViewById(R.id.spinner_City);
-
         ProvinceApi api = ApiClient.getClient().create(ProvinceApi.class);
         api.getProvinces().enqueue(new Callback<List<Province>>() {
             @Override

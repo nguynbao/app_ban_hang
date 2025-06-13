@@ -16,5 +16,12 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:background="@color/white"/>
+    <GridView
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:id="@+id/all_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"/>
 
 </LinearLayout>

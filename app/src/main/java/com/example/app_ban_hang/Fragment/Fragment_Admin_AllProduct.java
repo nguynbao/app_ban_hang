@@ -20,12 +20,12 @@ import java.util.List;
 public class Fragment_Admin_AllProduct extends Fragment {
     RecyclerView recycler_ProductAll;
     public Fragment_Admin_AllProduct(){};
+    ProductDao productDao;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment__admin_allproduct, container ,false);
-        ProductDao productDao = new ProductDao(getContext());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2) ;
         recycler_ProductAll = view.findViewById(R.id.recycler_ProductAll);
         recycler_ProductAll.setLayoutManager(gridLayoutManager);
@@ -39,7 +39,7 @@ public class Fragment_Admin_AllProduct extends Fragment {
     }
 
     private void loadAdapter() {
-        ProductDao productDao = new ProductDao(getContext());
+        productDao = new ProductDao(getContext());
         List<product> productList = productDao.getAll();
         adapter_admin_product adapter = new adapter_admin_product(productList);
         for (product product : productList) {

@@ -31,8 +31,7 @@ public class ProductDao {
             product.setProduct_name(cursor.getString(cursor.getColumnIndexOrThrow("name")));
             product.setProduct_description(cursor.getString(cursor.getColumnIndexOrThrow("description")));
             product.setProduct_price(cursor.getFloat(cursor.getColumnIndexOrThrow("price")));
-            String imageUriString = cursor.getString(cursor.getColumnIndexOrThrow("image_url"));
-            product.setProduct_imgRes(Uri.parse(imageUriString));
+            product.setProduct_imgRes(cursor.getString(cursor.getColumnIndexOrThrow("image_url")));
             productList.add(product);
         }
         cursor.close(); // Đóng cursor để tránh rò rỉ bộ nhớ

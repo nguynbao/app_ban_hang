@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Thêm người dùng"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ad_add_name_user"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/edt_underline"
+        android:hint="Tên khách hàng"
+        android:textColor="@color/black"
+        android:padding="15dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <EditText
+        android:id="@+id/ad_add_mail_user"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/edt_underline"
+        android:hint="Email"
+        android:textColor="@color/black"
+        android:padding="15dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ad_add_name_user" />
+
+    <EditText
+        android:id="@+id/ad_add_pass_user"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/edt_underline"
+        android:hint="Password"
+        android:textColor="@color/black"
+        android:padding="15dp"
+        android:inputType="textPassword"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ad_add_mail_user" />
+
+    <EditText
+        android:id="@+id/ad_add_phone_user"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/edt_underline"
+        android:hint="Phone"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:padding="15dp"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ad_add_pass_user" />
+
+    <Spinner
+        android:id="@+id/ad_add_city_user"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/edt_underline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ad_add_phone_user" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ad_save_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/btn_round_blue"
+        android:text="Thêm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ad_add_city_user" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
