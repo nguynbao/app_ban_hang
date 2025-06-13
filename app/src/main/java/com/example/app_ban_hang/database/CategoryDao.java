@@ -104,6 +104,24 @@ public class CategoryDao {
         }
         return name;
     }
+    public int getCategoryIdByName(String categoryName) {
+        Cursor cursor = db.query(
+                "categories",
+                new String[]{"category_id"},
+                "name = ?",
+                new String[]{categoryName},
+                null,
+                null,
+                null
+        );
+        int categoryId = -1;
+        if (cursor != null && cursor.moveToFirst()) {
+            categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
+            cursor.close();
+        }
+        return categoryId;
+    }
+
 
 
 }

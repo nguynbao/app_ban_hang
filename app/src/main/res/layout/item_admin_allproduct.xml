@@ -37,10 +37,10 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_edit"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:backgroundTint="@color/main_color"
-
             android:text="Sửa"
             android:textColor="@color/white"
             android:textAlignment="center"

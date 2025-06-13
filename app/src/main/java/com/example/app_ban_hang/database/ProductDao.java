@@ -78,4 +78,14 @@ public class ProductDao {
     public int delete(String id){
         return db.delete("products", "product_id=?", new String[]{id});
     }
+    //Cập nhật 1 sản phẩm
+    public int update(product product){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("category_id", product.getCategory_id());
+        contentValues.put("name", product.getProduct_name());
+        contentValues.put("description", product.getProduct_description());
+        contentValues.put("price", product.getProduct_price());
+        contentValues.put("image_url", product.getProduct_imgRes().toString());
+        return db.update("products", contentValues, "product_id=?", new String[]{String.valueOf(product.getProduct_id())});
+    }
 }
