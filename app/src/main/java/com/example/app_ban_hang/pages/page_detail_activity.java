@@ -60,7 +60,6 @@ public class page_detail_activity extends AppCompatActivity {
             if (imageUri != null) {
                 Glide.with(this)
                         .load(imageUri)
-//                        .placeholder(R.drawable.placeholder_image)
                         .into(productImgRes);
                 // Hiển thị tên và giá
                 productName.setText(product.getProduct_name());

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.Fragment_Invoice"
+    android:id="@+id/fragment__invoice"
     android:background="@color/white">
 
     <LinearLayout
@@ -119,6 +120,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
+        android:id="@+id/tax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -195,6 +197,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/totalAll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -218,7 +221,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton6"
+        android:id="@+id/btn_Order"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginStart="15dp"

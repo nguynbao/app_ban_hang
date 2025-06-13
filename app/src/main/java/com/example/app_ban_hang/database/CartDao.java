@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.app_ban_hang.Model.CartItem;
 import com.example.app_ban_hang.Model.product;
@@ -41,6 +42,17 @@ public class CartDao {
         return get(sql);
     }
 
+    // Lấy theo cartID
+    public CartItem getByCartId (String cartId){
+        String sql = "SELECT * FROM cart_items WHERE cart_item_id = ?";
+        List<CartItem> cartItemList = get(sql, cartId);
+        CartItem cartItem = new CartItem();
+        if (cartItemList.size() > 0){
+            cartItem = cartItemList.get(0);
+        }
+        return cartItem;
+    }
+
     // Lấy tất cả item theo idUser
     public List<CartItem> getItemIdUser (String UserID){
         String sql = "SELECT * FROM cart_items WHERE user_id = ?";
@@ -72,6 +84,13 @@ public class CartDao {
         contentValues.put("quantity", Quantity);
 
         return db.update("cart_items", contentValues, "cart_item_id = ?", new String[]{String.valueOf(cartID)});
+    }
+
+    //Xóa những đơn hàng mà product đã bị xóa khỏi data
+    public int deletedCartByIdProduct(int productID){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("product_id", productID);
+        return db.delete("cart_items", "product_id = ?", new String[]{String.valueOf(productID)});
     }
 
 }

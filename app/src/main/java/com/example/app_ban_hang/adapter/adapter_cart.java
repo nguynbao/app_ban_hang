@@ -1,28 +1,40 @@
 package com.example.app_ban_hang.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.app_ban_hang.Fragment.Fragment_Invoice;
 import com.example.app_ban_hang.Model.CartItem;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.CartDao;
 import com.example.app_ban_hang.database.ProductDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
     private List<CartItem> cartItemList;
+    private boolean selectedAllItem = false;
+    private List<Integer> checkedList = new ArrayList<>();
     public adapter_cart(List<CartItem> cartItemList) {
         this.cartItemList = cartItemList;
     }
@@ -38,6 +50,7 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
         public Button btnDecrease;
         public Button btnIncrease;
         public TextView txtQuantity;
+        public CheckBox selected_Item;
 
         public ViewHolder(View view){
             super(view);
@@ -47,6 +60,7 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
             btnDecrease = view.findViewById(R.id.btn_decrease);
             btnIncrease = view.findViewById(R.id.btn_increase);
             txtQuantity = view.findViewById(R.id.txt_quantity);
+            selected_Item = view.findViewById(R.id.selected_Item);
 
         }
     }
@@ -60,16 +74,30 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull adapter_cart.ViewHolder holder, int position) {
+        if (selectedAllItem == true){
+            holder.selected_Item.setChecked(true);
+            if (!checkedList.contains(position)) {
+                checkedList.add(position);
+                Log.d("Checkedlist", "đã thêm");
+            }
+        }else{
+            holder.selected_Item.setChecked(false);
+            if (checkedList.contains(position)) {
+                checkedList.remove(Integer.valueOf(position));
+                Log.d("Removelist", "đã xóa");
+            }
+        }
         CartItem cartItem = cartItemList.get(position);
         ProductDao productDao = new ProductDao(holder.itemView.getContext());
         product product = productDao.getById(String.valueOf(cartItem.getProduct_id()));
+        Log.d("IDproduct", String.valueOf(cartItem.getProduct_id()));
+        Log.d("IDproduct", productDao.getById("1").getProduct_name());
         String imageUri = product.getProduct_imgRes(); // hoặc String imagePath
-
-        Glide.with(holder.itemView.getContext())
-                .load(imageUri) // Glide hỗ trợ load URI, path, URL...
-//                .placeholder(R.drawable.placeholder_image) // ảnh chờ load
-//                .error(R.drawable.error_image) // ảnh lỗi
-                .into(holder.productImage);
+        if (imageUri != null){
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUri)
+                    .into(holder.productImage);
+        }
         holder.productName.setText(product.getProduct_name());
         holder.productPrice.setText(String.valueOf(product.getProduct_price()));
         holder.txtQuantity.setText(String.valueOf(cartItem.getQuantity()));
@@ -101,5 +129,45 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
 
         });
 
+        holder.selected_Item.setOnClickListener(view -> {
+            if (!holder.selected_Item.isChecked()){
+                if (checkedList.contains(position)) {
+                    checkedList.remove(Integer.valueOf(position));
+                    Toast.makeText(holder.itemView.getContext(), "Đã gỡ chọn", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            if (holder.selected_Item.isChecked()){
+                if (!checkedList.contains(position)) {
+                    checkedList.add(position);
+                    Toast.makeText(holder.itemView.getContext(), "Đã thêm vào danh sách chọn", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+    public void checkedAll (boolean checked){
+        selectedAllItem = checked;
+        notifyDataSetChanged();
+    }
+
+    public void paymentSelected(Context context){
+        List<Integer> cartIDList = new ArrayList<>();
+        for (int position : checkedList){
+            CartItem cartItem = cartItemList.get(position);
+            int cartID = cartItem.getCart_id();
+            cartIDList.add(cartID);
+        }
+        Fragment_Invoice fragment = new Fragment_Invoice();
+        Bundle bundle = new Bundle();
+        bundle.putIntegerArrayList("cartIDList", (ArrayList<Integer>) cartIDList);
+        fragment.setArguments(bundle);
+
+        // Replace fragment
+        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main, fragment) // id của FrameLayout hoặc NavHostFragment
+                .addToBackStack(null)
+                .commit();
     }
 }
