@@ -110,7 +110,7 @@ public class Fragment_Admin_AddProduct extends Fragment {
             List<String> categoryNames = categoryDao.getAllCategoryNames();
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     getContext(),
-                    R.layout.spinner_selected_item,
+                    android.R.layout.simple_spinner_dropdown_item,
                     categoryNames
             );
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
