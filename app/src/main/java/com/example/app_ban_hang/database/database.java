@@ -33,34 +33,4 @@ public class database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS order_items");
         onCreate(db);
     }
-
-    public boolean dangKi(String name, String email , String password, String phone){
-        SQLiteDatabase db = this.getWritableDatabase();
-        if(checkEmailExists(email)){
-            // Email đã tồn tại
-            return false;
-        }
-        String sql = "INSERT INTO users (full_name, email, password, phone) VALUES(?,?,?,?)";
-        try {
-            db.execSQL(sql, new String[]{name, email, password, phone});
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public boolean checkEmailExists(String email){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT * FROM users WHERE email = ?";
-        Cursor cursor = db.rawQuery(sql, new String[]{email});
-        boolean exists = cursor.getCount() > 0;
-        cursor.close();
-        return exists;
-    }
-
-
-
-
-
-
 }
