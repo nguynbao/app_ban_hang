@@ -1,10 +1,14 @@
 package com.example.app_ban_hang.pages;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;

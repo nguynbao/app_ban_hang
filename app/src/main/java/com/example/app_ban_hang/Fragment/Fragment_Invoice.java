@@ -2,7 +2,9 @@ package com.example.app_ban_hang.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.app_ban_hang.Model.CartItem;
 import com.example.app_ban_hang.R;
@@ -23,6 +26,7 @@ import java.util.List;
 
 
 public class Fragment_Invoice extends Fragment {
+    private ArrayList<Integer> cartIDList1;
 
     public Fragment_Invoice() {
         // Required empty public constructor
@@ -38,6 +42,7 @@ public class Fragment_Invoice extends Fragment {
         List<CartItem> cartItemList = new ArrayList<>();
         if (getArguments() != null) {
             ArrayList<Integer> cartIDList = getArguments().getIntegerArrayList("cartIDList");
+            cartIDList1 = cartIDList;
             for (int i : cartIDList){
                 CartItem cartItem = cartDao.getByCartId(String.valueOf(i));
                 Log.d("cartIDList", String.valueOf(i));
@@ -62,7 +67,17 @@ public class Fragment_Invoice extends Fragment {
 
         Button btn_Order = view.findViewById(R.id.btn_Order);
         btn_Order.setOnClickListener(v -> {
+            Fragment_Address fragment = new Fragment_Address();
+            Bundle bundle = new Bundle();
+            bundle.putIntegerArrayList("cartIDList", cartIDList1);
+            fragment.setArguments(bundle);
 
+            // Replace fragment
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main, fragment) // id của FrameLayout hoặc NavHostFragment
+                    .addToBackStack(null)
+                    .commit();
         });
         return view;
     }

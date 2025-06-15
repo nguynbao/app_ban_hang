@@ -9,13 +9,14 @@ public class order {
     private double totalAmount;
     private String shippingAddress;
 
+    public order(){}
 
-    public order(String shippingAddress, double totalAmount, Date orderDate, int userId, int orderId) {
+
+    public order(String shippingAddress, double totalAmount, Date orderDate, int userId) {
         this.shippingAddress = shippingAddress;
         this.totalAmount = totalAmount;
         this.orderDate = orderDate;
         this.userId = userId;
-        this.orderId = orderId;
     }
 
     public int getOrderId() {

@@ -8,8 +8,10 @@ public class orderItem {
     private double unitPrice;
     private double subtotal;
 
-    public orderItem(int orderItemId, int orderId, int productId, int quantity, double unitPrice, double subtotal) {
-        this.orderItemId = orderItemId;
+    public orderItem() {
+    }
+
+    public orderItem( int orderId, int productId, int quantity, double unitPrice, double subtotal) {
         this.orderId = orderId;
         this.productId = productId;
         this.quantity = quantity;
