@@ -166,7 +166,7 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
         // Replace fragment
         FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.main, fragment) // id của FrameLayout hoặc NavHostFragment
+                .replace(R.id.main, fragment)
                 .addToBackStack(null)
                 .commit();
     }

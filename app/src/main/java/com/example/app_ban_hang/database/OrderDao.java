@@ -43,6 +43,7 @@ public class OrderDao {
 
             order.setShippingAddress(cursor.getString(cursor.getColumnIndexOrThrow("shipping_address")));
             order.setTotalAmount(cursor.getFloat(cursor.getColumnIndexOrThrow("total_amount")));
+            order.setPhone_no(cursor.getString(cursor.getColumnIndexOrThrow("phone_no")));
             orderList.add(order);
 
         }
@@ -59,6 +60,7 @@ public class OrderDao {
 
         String orderDate = sdf.format(order.getOrderDate());
         contentValues.put("order_date", orderDate);
+        contentValues.put("phone_no", order.getPhone_no());
 
         return db.insert("orders", null, contentValues);
     }

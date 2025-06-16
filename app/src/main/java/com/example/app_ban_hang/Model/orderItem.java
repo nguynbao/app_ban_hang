@@ -5,13 +5,13 @@ public class orderItem {
     private int orderId;
     private int productId;
     private int quantity;
-    private double unitPrice;
-    private double subtotal;
+    private float unitPrice;
+    private float subtotal;
 
     public orderItem() {
     }
 
-    public orderItem( int orderId, int productId, int quantity, double unitPrice, double subtotal) {
+    public orderItem( int orderId, int productId, int quantity, float unitPrice, float subtotal) {
         this.orderId = orderId;
         this.productId = productId;
         this.quantity = quantity;
@@ -55,7 +55,7 @@ public class orderItem {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -63,7 +63,7 @@ public class orderItem {
         return subtotal;
     }
 
-    public void setSubtotal(double subtotal) {
+    public void setSubtotal(float subtotal) {
         this.subtotal = subtotal;
     }
 }

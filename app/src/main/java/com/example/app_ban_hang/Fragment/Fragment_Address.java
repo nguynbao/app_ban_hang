@@ -1,5 +1,9 @@
 package com.example.app_ban_hang.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -23,10 +27,19 @@ import com.example.app_ban_hang.Model.CartItem;
 import com.example.app_ban_hang.Model.District;
 import com.example.app_ban_hang.Model.Province;
 import com.example.app_ban_hang.Model.ProvinceWithDistricts;
+import com.example.app_ban_hang.Model.order;
+import com.example.app_ban_hang.Model.orderItem;
+import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.CartDao;
+import com.example.app_ban_hang.database.OrderDao;
+import com.example.app_ban_hang.database.OrderItemDao;
+import com.example.app_ban_hang.database.ProductDao;
+import com.example.app_ban_hang.pages.page_home_activity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,6 +50,7 @@ public class Fragment_Address extends Fragment {
     Spinner spinnerDistrict, spinnerCity;
     EditText edtPhone, edtAddress;
     Button btn_Order;
+    String shippingAddress, phoneUser;
 
     public Fragment_Address() {
         // Required empty public constructor
@@ -90,20 +104,88 @@ public class Fragment_Address extends Fragment {
                 Log.d("API", "onFailure called: " + t.getMessage());
             }
         });
+        btn_Order = view.findViewById(R.id.btn_Order);
+        edtPhone = view.findViewById(R.id.edtPhone);
+        edtAddress = view.findViewById(R.id.edtAddress);
+        btn_Order.setOnClickListener(v -> {
+            String detailAddress = edtAddress.getText().toString();
+            String district = spinnerDistrict.getSelectedItem().toString();
+            String city = spinnerCity.getSelectedItem().toString();
+            shippingAddress = detailAddress + "," + district + "," + city;
+            phoneUser = edtPhone.getText().toString();
+            Log.d("shippingAddress", shippingAddress);
+            if (!detailAddress.isEmpty() && !phoneUser.isEmpty()){
+                orderItem();
+            }else {
+                Toast.makeText(getContext(), "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return view;
+    }
+
+    private void orderItem() {
         CartDao cartDao = new CartDao(getContext());
+        ArrayList<Integer> cartIDList = new ArrayList<>();
         List<CartItem> cartItemList = new ArrayList<>();
+        Float totalAll = 0f;
         if (getArguments() != null) {
-            ArrayList<Integer> cartIDList = getArguments().getIntegerArrayList("cartIDList");
+            cartIDList = getArguments().getIntegerArrayList("cartIDList");
+            totalAll = getArguments().getFloat("totalAll");
+            Log.d("totalAll", totalAll.toString());
+        }
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserSession", MODE_PRIVATE);
+        int userID = sharedPreferences.getInt("user_id", -1);
+        order order = new order();
+        order.setUserId(userID);
+        order.setShippingAddress(shippingAddress);
+        order.setTotalAmount(totalAll);
+        Date now = Calendar.getInstance().getTime();
+        order.setOrderDate(now);
+        order.setPhone_no(phoneUser);
+        OrderDao orderDao = new OrderDao(getContext());
+        int orderID = Integer.parseInt(String.valueOf(orderDao.insertOrder(order)));
+        if (orderID != -1){
             for (int i : cartIDList){
                 CartItem cartItem = cartDao.getByCartId(String.valueOf(i));
-                Log.d("cartIDList", String.valueOf(i));
-                cartItemList.add(cartItem);
+                int productID = cartItem.getProduct_id();
+                int quantity = cartItem.getQuantity();
+                ProductDao productDao = new ProductDao(getContext());
+                product product = productDao.getById(String.valueOf(productID));
+                orderItem orderItem = new orderItem();
+                orderItem.setOrderId(orderID);
+                orderItem.setProductId(productID);
+                orderItem.setQuantity(quantity);
+                orderItem.setUnitPrice(product.getProduct_price());
+                orderItem.setSubtotal(quantity * product.getProduct_price());
+                Log.d("setSubtotal", String.valueOf(orderItem.getSubtotal()));
+                OrderItemDao orderItemDao = new OrderItemDao(getContext());
+                long result = orderItemDao.insertOrderItem(orderItem);
+                if (result != -1){
+                    Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                    List<orderItem> orderItemList = orderItemDao.getAll();
+                    for (orderItem orderItem1 : orderItemList){
+                        if (orderItem1.getOrderItemId() == 1 || orderItem1.getOrderItemId() ==2){
+                            continue;
+                        }
+                        Log.d("orderItem1", String.valueOf(orderItem1.getOrderItemId()));
+                        Log.d("orderItem1", String.valueOf(orderItem1.getOrderId()));
+                        Log.d("orderItem1", String.valueOf(orderItem1.getProductId()));
+                        Log.d("orderItem1", String.valueOf(orderItem1.getQuantity()));
+                        Log.d("orderItem1", String.valueOf(orderItem1.getUnitPrice()));
+                        Log.d("orderItem1", String.valueOf(orderItem1.getSubtotal()));
+
+                    }
+                    Intent intent = new Intent(getContext(), page_home_activity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getContext(), "Đặt hàng thất bại", Toast.LENGTH_SHORT).show();
+                }
             }
         }
 
-
-        return view;
     }
+
     private void loadDistricts(int provinceCode, Spinner spinnerDistrict) {
         ProvinceApi provinceApi = ApiClient.getClient().create(ProvinceApi.class);
         provinceApi.getProvinceWithDistricts(provinceCode).enqueue(new Callback<ProvinceWithDistricts>() {

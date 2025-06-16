@@ -38,6 +38,12 @@ public class OrderItemDao {
         return orderItemList;
     }
 
+    //Lấy tất cả orderItem
+    public List<orderItem> getAll(){
+        String sql = "SELECT * FROM order_items";
+        return get(sql);
+    }
+
     //Thêm orderItem
     public long insertOrderItem(orderItem orderItem){
         ContentValues contentValues = new ContentValues();

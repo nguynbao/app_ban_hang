@@ -70,6 +70,7 @@ public class Fragment_Invoice extends Fragment {
             Fragment_Address fragment = new Fragment_Address();
             Bundle bundle = new Bundle();
             bundle.putIntegerArrayList("cartIDList", cartIDList1);
+            bundle.putFloat("totalAll", adapterInvoice.totalAll() + fee*2);
             fragment.setArguments(bundle);
 
             // Replace fragment

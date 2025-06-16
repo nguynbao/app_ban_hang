@@ -58,6 +58,7 @@ public class Create_table {
                     "order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                     "total_amount REAL NOT NULL DEFAULT 0.00," +
                     "shipping_address TEXT NOT NULL," +
+                    "phone_no TEXT NOT NULL," +
                     "FOREIGN KEY (user_id) REFERENCES users(user_id) " +
                     "ON DELETE RESTRICT ON UPDATE CASCADE" +
                     ");";

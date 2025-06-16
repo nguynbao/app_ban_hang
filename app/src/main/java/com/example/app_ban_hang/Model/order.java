@@ -6,17 +6,19 @@ public class order {
     private int orderId;
     private int userId;
     private Date orderDate;
-    private double totalAmount;
+    private Float totalAmount;
     private String shippingAddress;
+    private String phone_no;
 
     public order(){}
 
 
-    public order(String shippingAddress, double totalAmount, Date orderDate, int userId) {
+    public order(String shippingAddress, Float totalAmount, Date orderDate, int userId, String phone_no) {
         this.shippingAddress = shippingAddress;
         this.totalAmount = totalAmount;
         this.orderDate = orderDate;
         this.userId = userId;
+        this.phone_no = phone_no;
     }
 
     public int getOrderId() {
@@ -43,11 +45,11 @@ public class order {
         this.orderDate = orderDate;
     }
 
-    public double getTotalAmount() {
+    public Float getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(Float totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -57,5 +59,12 @@ public class order {
 
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
+    }
+    public String getPhone_no() {
+        return phone_no;
+    }
+
+    public void setPhone_no(String phone_no) {
+        this.phone_no = phone_no;
     }
 }
