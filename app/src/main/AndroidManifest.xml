@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App_ban_hang">
         <activity
+            android:name=".pages_admin.page_admin_detail_order"
+            android:exported="false" />
+        <activity
+            android:name=".pages.page_detail_activity"
+            android:exported="false" />
+        <activity
+            android:name=".pages.page_wish_activity"
+            android:exported="false" />
+        <activity
             android:name=".pages_admin.page_admin_Edit_Product"
             android:exported="false" />
         <activity
@@ -26,9 +35,6 @@
             android:exported="false" />
         <activity
             android:name=".pages.page_cart_activity"
-            android:exported="false" />
-        <activity
-            android:name=".pages.page_detail_activity"
             android:exported="false" />
         <activity
             android:name=".pages_admin.page_admin_activity"

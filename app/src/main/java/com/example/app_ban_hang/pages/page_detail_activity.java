@@ -21,13 +21,14 @@ import com.example.app_ban_hang.Model.CartItem;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.CartDao;
+import com.example.app_ban_hang.database.WishlistDAO;
 import com.example.app_ban_hang.database.ProductDao;
 
 public class page_detail_activity extends AppCompatActivity {
     private ImageView productImgRes;
     private TextView productName;
     private TextView productPrice;
-    private ImageButton addcart;
+    private ImageButton addcart, addwish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class page_detail_activity extends AppCompatActivity {
         productName = findViewById(R.id.detail_name);
         productPrice = findViewById(R.id.detail_price);
         addcart = findViewById(R.id.addcart);
+        addwish = findViewById(R.id.add_wish);
 
         // Nhận productId từ Intent
         int productId = getIntent().getIntExtra("intID", -1);
@@ -78,7 +80,8 @@ public class page_detail_activity extends AppCompatActivity {
                     CartItem cartItemIdProduct = cartDao.getItemIdProduct(String.valueOf(product.getProduct_id()));
                     if (cartItemIdProduct != null && product.getProduct_id() == cartItemIdProduct.getProduct_id()) {
                         Toast.makeText(this, "Sản phẩm đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
-                    } else {
+                    }
+                    else {
                         long check_insert = cartDao.insert(cartItem);
                         if (check_insert == -1) {
                             Toast.makeText(this, "Thêm sản phẩm thất bại", Toast.LENGTH_SHORT).show();
@@ -86,10 +89,30 @@ public class page_detail_activity extends AppCompatActivity {
                             Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     // Chuyển sang giỏ hàng
                     Intent intent = new Intent(page_detail_activity.this, page_cart_activity.class);
                     startActivity(intent);
+                });
+                // Xử lý nút thêm yêu thích
+                addwish.setOnClickListener(v -> {
+                    SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
+                    int userID = sharedPreferences.getInt("user_id", -1); // -1 nếu chưa đăng nhập
+                    Log.d("USERIID", String.valueOf(userID));
+
+                    WishlistDAO wishlistDAO = new WishlistDAO(this);
+
+                    // Kiểm tra sản phẩm đã có trong danh sách yêu thích chưa
+                    if (wishlistDAO.isProductInWishlist(userID, product.getProduct_id())) {
+                        Toast.makeText(this, "Sản phẩm đã có trong danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Thêm sản phẩm vào danh sách yêu thích
+                        long check_insert = wishlistDAO.insertWishlist(userID, product.getProduct_id());
+                        if (check_insert == -1) {
+                            Toast.makeText(this, "Thêm vào danh sách yêu thích thất bại", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Sản phẩm đã được thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 });
 
             } else {

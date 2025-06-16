@@ -17,9 +17,7 @@ import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.pages.page_detail_activity;
 
-import java.sql.Array;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class adapter_product_overview extends RecyclerView.Adapter<adapter_product_overview.productOverViewViewHolder> {
     private List<product> productList;
