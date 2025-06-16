@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.app_ban_hang.Model.orderItem;
 import com.example.app_ban_hang.R;
+import com.example.app_ban_hang.database.OrderDao;
 import com.example.app_ban_hang.database.OrderItemDao;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class page_admin_detail_order extends AppCompatActivity {
 
     private TextView order_customer, order_ID, order_quanty, order_city;
     private AppCompatButton order_acpt;
+    int orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class page_admin_detail_order extends AppCompatActivity {
         order_acpt = findViewById(R.id.order_acpt);
 
         // Lấy order_id từ Intent
-        int orderId = getIntent().getIntExtra("order_id", -1);
+      orderId = getIntent().getIntExtra("order_id", -1);
 
         if (orderId != -1) {
             order_ID.setText("Mã đơn: " + orderId);
@@ -58,11 +60,22 @@ public class page_admin_detail_order extends AppCompatActivity {
                 order_quanty.setText("Số lượng: " + totalQuantity);
                 order_customer.setText("Khách hàng: " + itemList.get(0).getOrderId());
                 order_city.setText(city);
+                order_acpt.setOnClickListener(v -> {
+                    acceptOrder(orderId);
+                });
+
+
             } else {
                 Toast.makeText(this, "Không có sản phẩm nào trong đơn hàng!", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "Không tìm thấy mã đơn hàng!", Toast.LENGTH_SHORT).show();
         }
-    }
 }
+    private void acceptOrder(int orderId) {
+        OrderDao orderDao = new OrderDao(this);
+        orderDao.approveOrder(orderId);
+        Toast.makeText(this, "Đơn hàng đã được chấp nhận!", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+    }
