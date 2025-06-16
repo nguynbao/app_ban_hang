@@ -165,9 +165,6 @@ public class Fragment_Address extends Fragment {
                     Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                     List<orderItem> orderItemList = orderItemDao.getAll();
                     for (orderItem orderItem1 : orderItemList){
-                        if (orderItem1.getOrderItemId() == 1 || orderItem1.getOrderItemId() ==2){
-                            continue;
-                        }
                         Log.d("orderItem1", String.valueOf(orderItem1.getOrderItemId()));
                         Log.d("orderItem1", String.valueOf(orderItem1.getOrderId()));
                         Log.d("orderItem1", String.valueOf(orderItem1.getProductId()));

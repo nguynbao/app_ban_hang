@@ -57,6 +57,7 @@ public class Create_table {
                     "user_id INTEGER NOT NULL," +
                     "order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP," +
                     "total_amount REAL NOT NULL DEFAULT 0.00," +
+                    "status TEXT NOT NULL DEFAULT 'Pending'," +
                     "shipping_address TEXT NOT NULL," +
                     "phone_no TEXT NOT NULL," +
                     "FOREIGN KEY (user_id) REFERENCES users(user_id) " +

@@ -44,6 +44,10 @@ public class OrderDao {
             order.setShippingAddress(cursor.getString(cursor.getColumnIndexOrThrow("shipping_address")));
             order.setTotalAmount(cursor.getFloat(cursor.getColumnIndexOrThrow("total_amount")));
             order.setPhone_no(cursor.getString(cursor.getColumnIndexOrThrow("phone_no")));
+            // Thêm lấy trạng thái đơn hàng
+            if (cursor.getColumnIndex("status") != -1) {
+                order.setStatus(cursor.getString(cursor.getColumnIndexOrThrow("status")));
+            }
             orderList.add(order);
 
         }
@@ -61,7 +65,40 @@ public class OrderDao {
         String orderDate = sdf.format(order.getOrderDate());
         contentValues.put("order_date", orderDate);
         contentValues.put("phone_no", order.getPhone_no());
+        contentValues.put("status", "pending");
 
         return db.insert("orders", null, contentValues);
+    }
+
+    // Lấy tất cả đơn hàng
+    public List<order> getAll() {
+        String sql = "SELECT * FROM orders ORDER BY order_date DESC";
+        return get(sql);
+    }
+
+    // Duyệt đơn hàng
+    public int approveOrder(int orderId) {
+        ContentValues values = new ContentValues();
+        values.put("status", "approved");
+        return db.update("orders", values, "order_id = ?", new String[]{String.valueOf(orderId)});
+    }
+
+    // Từ chối đơn hàng
+    public int rejectOrder(int orderId) {
+        ContentValues values = new ContentValues();
+        values.put("status", "rejected");
+        return db.update("orders", values, "order_id = ?", new String[]{String.valueOf(orderId)});
+    }
+
+    // Lấy danh sách đơn hàng đang chờ duyệt
+    public List<order> getPendingOrders() {
+        String sql = "SELECT * FROM orders WHERE status = ? ORDER BY order_date DESC";
+        return get(sql, "pending");
+    }
+
+    // Lấy danh sách đơn hàng đã duyệt
+    public List<order> getApprovedOrders() {
+        String sql = "SELECT * FROM orders WHERE status = ? ORDER BY order_date DESC";
+        return get(sql, "approved");
     }
 }
