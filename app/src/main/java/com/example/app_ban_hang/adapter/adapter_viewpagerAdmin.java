@@ -11,6 +11,7 @@ import com.example.app_ban_hang.Fragment.Fragment_Admin_AddUsers;
 import com.example.app_ban_hang.Fragment.Fragment_Admin_AllCate;
 import com.example.app_ban_hang.Fragment.Fragment_Admin_AllProduct;
 import com.example.app_ban_hang.Fragment.Fragment_Admin_AllUsers;
+import com.example.app_ban_hang.Fragment.Fragment_Admin_Dashboard;
 
 public class adapter_viewpagerAdmin extends FragmentStateAdapter {
     public adapter_viewpagerAdmin(@NonNull FragmentActivity fragmentActivity) {
@@ -22,7 +23,7 @@ public class adapter_viewpagerAdmin extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new Fragment();
+                return new Fragment_Admin_Dashboard();
             case 1:
                 return new Fragment_Admin_AddCate();
             case 2:
@@ -36,7 +37,7 @@ public class adapter_viewpagerAdmin extends FragmentStateAdapter {
             case 6:
                 return new Fragment_Admin_AllUsers();
             default:
-                return new Fragment(); // fallback
+                return new Fragment_Admin_Dashboard(); // fallback
         }
     }
 

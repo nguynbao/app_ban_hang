@@ -59,6 +59,7 @@ public class page_admin_activity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_Dashboard) {
+                    name.setText("Trang chủ");// trang chủ
                     viewPager.setCurrentItem(0);// danh thu
                 } else if (id == R.id.nav_cate_add) {
                     viewPager.setCurrentItem(1);

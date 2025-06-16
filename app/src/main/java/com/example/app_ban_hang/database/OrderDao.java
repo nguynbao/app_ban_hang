@@ -19,22 +19,24 @@ import java.util.Locale;
 public class OrderDao {
     private SQLiteDatabase db;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    public OrderDao (Context context){
+
+    public OrderDao(Context context) {
         database dbHelper = new database(context);
         db = dbHelper.getWritableDatabase();
     }
+
     @SuppressLint("Range")
-    public List<order> get(String sql, String... selectArgs){
+    public List<order> get(String sql, String... selectArgs) {
         List<order> orderList = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, selectArgs);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             order order = new order();
             order.setOrderId(cursor.getInt(cursor.getColumnIndexOrThrow("order_id")));
             order.setUserId(cursor.getInt(cursor.getColumnIndexOrThrow("user_id")));
 
             String dateString = cursor.getString(cursor.getColumnIndexOrThrow("order_date"));
-            try{
-                Date orderDate =  sdf.parse(dateString);
+            try {
+                Date orderDate = sdf.parse(dateString);
                 order.setOrderDate(orderDate);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -43,23 +45,63 @@ public class OrderDao {
 
             order.setShippingAddress(cursor.getString(cursor.getColumnIndexOrThrow("shipping_address")));
             order.setTotalAmount(cursor.getFloat(cursor.getColumnIndexOrThrow("total_amount")));
-            orderList.add(order);
 
+            // Thêm lấy trạng thái đơn hàng
+            if (cursor.getColumnIndex("status") != -1) {
+                order.setStatus(cursor.getString(cursor.getColumnIndexOrThrow("status")));
+            }
+
+            orderList.add(order);
         }
         cursor.close();
         return orderList;
     }
 
-    //Thêm order mới
-    public long insertOrder(order order){
+    // Thêm order mới
+    public long insertOrder(order order) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("user_id", order.getUserId() );
+        contentValues.put("user_id", order.getUserId());
         contentValues.put("shipping_address", order.getShippingAddress());
         contentValues.put("total_amount", order.getTotalAmount());
 
         String orderDate = sdf.format(order.getOrderDate());
         contentValues.put("order_date", orderDate);
 
+        // Gán trạng thái mặc định là "pending"
+        contentValues.put("status", "pending");
+
         return db.insert("orders", null, contentValues);
+    }
+
+    // Lấy tất cả đơn hàng
+    public List<order> getAll() {
+        String sql = "SELECT * FROM orders ORDER BY order_date DESC";
+        return get(sql);
+    }
+
+    // Duyệt đơn hàng
+    public int approveOrder(int orderId) {
+        ContentValues values = new ContentValues();
+        values.put("status", "approved");
+        return db.update("orders", values, "order_id = ?", new String[]{String.valueOf(orderId)});
+    }
+
+    // Từ chối đơn hàng
+    public int rejectOrder(int orderId) {
+        ContentValues values = new ContentValues();
+        values.put("status", "rejected");
+        return db.update("orders", values, "order_id = ?", new String[]{String.valueOf(orderId)});
+    }
+
+    // Lấy danh sách đơn hàng đang chờ duyệt
+    public List<order> getPendingOrders() {
+        String sql = "SELECT * FROM orders WHERE status = ? ORDER BY order_date DESC";
+        return get(sql, "pending");
+    }
+
+    // Lấy danh sách đơn hàng đã duyệt
+    public List<order> getApprovedOrders() {
+        String sql = "SELECT * FROM orders WHERE status = ? ORDER BY order_date DESC";
+        return get(sql, "approved");
     }
 }
