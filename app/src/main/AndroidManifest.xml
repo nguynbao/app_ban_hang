@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App_ban_hang">
         <activity
+            android:name=".pages_admin.page_admin_detail_order"
+            android:exported="false" />
+        <activity
             android:name=".pages.page_detail_activity"
             android:exported="false" />
         <activity

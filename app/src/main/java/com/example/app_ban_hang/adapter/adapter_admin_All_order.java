@@ -1,5 +1,6 @@
 package com.example.app_ban_hang.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app_ban_hang.Model.order;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.OrderDao;
+import com.example.app_ban_hang.pages_admin.page_admin_detail_order;
 
 import java.util.List;
 
@@ -62,6 +64,15 @@ public class adapter_admin_All_order extends RecyclerView.Adapter<adapter_admin_
                 } else {
                     Toast.makeText(view.getContext(), "Duyệt đơn thất bại!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        holder.order_name_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), page_admin_detail_order.class);
+                intent.putExtra("order_id", order.getOrderId());
+                intent.putExtra("city", order.getShippingAddress());
+                view.getContext().startActivity(intent);
             }
         });
     }

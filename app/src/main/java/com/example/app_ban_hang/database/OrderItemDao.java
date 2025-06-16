@@ -48,4 +48,8 @@ public class OrderItemDao {
         contentValues.put("subtotal", orderItem.getSubtotal());
         return db.insert("order_items", null, contentValues);
     }
+    public List<orderItem> getOrderItemsByOrderId(int orderId) {
+        String sql = "SELECT * FROM order_items WHERE order_id = ?";
+        return get(sql, String.valueOf(orderId));
+    }
 }
