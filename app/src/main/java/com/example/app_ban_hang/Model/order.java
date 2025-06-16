@@ -8,16 +8,18 @@ public class order {
     private Date orderDate;
     private Float totalAmount;
     private String shippingAddress;
+    private String status;
     private String phone_no;
 
     public order(){}
 
 
-    public order(String shippingAddress, Float totalAmount, Date orderDate, int userId, String phone_no) {
+    public order(String shippingAddress, Float totalAmount, Date orderDate, int userId, String phone_no, String status) {
         this.shippingAddress = shippingAddress;
         this.totalAmount = totalAmount;
         this.orderDate = orderDate;
         this.userId = userId;
+        this.status = status;
         this.phone_no = phone_no;
     }
 
@@ -66,5 +68,12 @@ public class order {
 
     public void setPhone_no(String phone_no) {
         this.phone_no = phone_no;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
