@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Name"
+            android:text="Tên khách hàng"
             android:textColor="@color/black" />
 
         <EditText
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Your email"
+            android:text="Email"
             android:textColor="@color/black" />
 
         <EditText
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Your phone"
+            android:text="Số điện thoại"
             android:textColor="@color/black" />
 
         <EditText
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Your phone"
+            android:text="Pass"
             android:textColor="@color/black" />
 
         <EditText
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Your city"
+            android:text="Thành phố"
             android:textColor="@color/black" />
 
         <Spinner

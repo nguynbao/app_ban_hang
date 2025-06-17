@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Account details"
+            android:text="Thông tin"
             android:textColor="@color/white"
             android:textSize="35dp"
             android:textStyle="bold"
@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Name"
+            android:text="Tên"
             android:textColor="@color/black"/>
         <EditText
             android:id="@+id/fullname"
@@ -60,7 +60,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your email"
+            android:text="Email"
             android:textColor="@color/black"/>
         <EditText
             android:id="@+id/email"
@@ -75,7 +75,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your password"
+            android:text="Password"
             android:textColor="@color/black"/>
         <EditText
             android:id="@+id/pass"
@@ -90,33 +90,13 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your city"
+            android:text="Thành phố"
             android:textColor="@color/black"/>
-        <EditText
+        <Spinner
             android:id="@+id/city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your city"
-            android:inputType="text"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/black"
-            android:textColorHint="@color/gray"/>
-        <LinearLayout
-            android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|left"
-            android:orientation="horizontal">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="I agree with terms and conditions"
-                android:textColor="@color/black"/>
-        </LinearLayout>
+            android:background="@drawable/edt_underline" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save"
             android:layout_marginTop="30dp"

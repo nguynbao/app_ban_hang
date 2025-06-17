@@ -2,6 +2,7 @@ package com.example.app_ban_hang.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ public class Fragment_Categories extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__categories, container, false);
-        ImageButton btn_cate_shoes = view.findViewById(R.id.btn_cate_shoes);
+        AppCompatButton btn_cate_shoes = view.findViewById(R.id.btn_cate_shoes);
         ImageButton btn_cate_clothing = view.findViewById(R.id.btn_cate_clothing);
         ImageButton btn_cate_food = view.findViewById(R.id.btn_cate_food);
         ImageButton btn_cate_accessories = view.findViewById(R.id.btn_cate_accessories);

@@ -16,7 +16,7 @@
     </group>
 
     <group android:id="@+id/group_user" android:checkableBehavior="none">
-        <item android:title="Người dung"></item>
+        <item android:title="Người dùng"></item>
         <item android:id="@+id/nav_users_add"
             android:title="Thêm người dùng"/>
         <item android:id="@+id/nav_users_all"

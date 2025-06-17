@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Search for Products More"
+        android:text="Tìm kiếm"
         android:textColor="@color/gray"
         android:gravity="left|center"
         android:paddingStart="40dp"
@@ -53,32 +53,5 @@
         android:gravity="center"
         android:layout_height="0dp"
         android:layout_weight="0.3"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="Deals of the day"
-            android:minLines="2"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:text="View All"
-            android:layout_gravity="right|center"
-            android:textColor="@color/black"/>
-    </LinearLayout>
 
 </LinearLayout>
