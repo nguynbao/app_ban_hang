@@ -175,6 +175,7 @@ public class Fragment_Address extends Fragment {
                     }
                     Intent intent = new Intent(getContext(), page_home_activity.class);
                     startActivity(intent);
+                    getActivity().finish();
                 }else {
                     Toast.makeText(getContext(), "Đặt hàng thất bại", Toast.LENGTH_SHORT).show();
                 }

@@ -153,6 +153,10 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
 
     public void paymentSelected(Context context){
         List<Integer> cartIDList = new ArrayList<>();
+        if (checkedList.isEmpty()){
+            Toast.makeText(context, "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show();
+            return;
+        }
         for (int position : checkedList){
             CartItem cartItem = cartItemList.get(position);
             int cartID = cartItem.getCart_id();

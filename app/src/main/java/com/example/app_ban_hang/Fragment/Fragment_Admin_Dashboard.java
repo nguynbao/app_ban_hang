@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_hang.Model.order;
@@ -31,6 +32,7 @@ public class Fragment_Admin_Dashboard extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView_admin_order);
         OrderDao orderDao = new OrderDao(getContext());
         orderList = orderDao.getAll();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new adapter_admin_All_order(orderList);
         recyclerView.setAdapter(adapter);
         return view;
