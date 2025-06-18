@@ -76,7 +76,7 @@ public class page_admin_Edit_user extends AppCompatActivity {
                             R.layout.spinner_selected_item,
                             provinceList
                     );
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapter.setDropDownViewResource(android.R.layout.R.layout.item_spinner_custom);
                     admin_city.setAdapter(adapter);
                     // 👉 Sau khi set adapter xong, đặt giá trị thành phố cho user
                     if (user != null) {
