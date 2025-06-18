@@ -68,7 +68,7 @@ public class page_dangki_activity extends AppCompatActivity {
                             android.R.layout.simple_spinner_item,
                             provinceList
                     );
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapter.setDropDownViewResource(R.layout.item_spinner_custom);
                     spinner_City.setAdapter(adapter);
                 }else {
                     Log.d("API", "Response failed or empty body, code: " + response.code());

@@ -50,22 +50,26 @@
         android:id="@+id/btn_cate_shoes"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@drawable/btn_round_white"
+        android:background="@drawable/retacgle_stroke"
+        android:src="@drawable/icon_shirt"
+        android:text="HAHA2"
+        android:stateListAnimator="@null"
         android:textColor="@color/black"
-        android:text="haha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.08" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cate_clothing"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
-        android:src="@drawable/icon_shirt"
+        android:text="HAHA2"
+        android:textColor="@color/black"
+        android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"
@@ -73,12 +77,13 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.08" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cate_food"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
-        android:src="@drawable/icon_eat"
+        android:textColor="@color/black"
+        android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
@@ -86,12 +91,13 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.47" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cate_accessories"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
-        android:src="@drawable/icon_accessories"
+        android:textColor="@color/black"
+        android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"
@@ -99,12 +105,13 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.47" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cate_comestic"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
-        android:src="@drawable/icon_lips"
+        android:textColor="@color/black"
+        android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
@@ -112,12 +119,13 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.86" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cate_tech"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/retacgle_stroke"
-        android:src="@drawable/icon_phone"
+        android:textColor="@color/black"
+        android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"

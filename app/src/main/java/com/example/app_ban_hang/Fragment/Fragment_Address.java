@@ -69,21 +69,10 @@ public class Fragment_Address extends Fragment {
                 List<Province> provinceList = response.body();
                 ArrayAdapter<Province> adapter = new ArrayAdapter<>(
                         getContext(),
-                        android.R.layout.simple_spinner_item,
+                        R.layout.spinner_selected_item,
                         provinceList
-                ){
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
-                        View view = super.getView(position, convertView, parent);
-                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                        // Đổi màu chữ item đang hiển thị trên Spinner
-                        tv.setTextColor(Color.parseColor("#000000")); // màu cam hoặc bạn chọn màu khác
-
-                        return view;
-                    }
-                };
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                );
+                adapter.setDropDownViewResource(R.layout.item_spinner_custom);
                 spinnerCity.setAdapter(adapter);
                 spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -192,19 +181,8 @@ public class Fragment_Address extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<District> districts = response.body().getDistricts();
                     ArrayAdapter<District> adapter = new ArrayAdapter<>(getContext(),
-                            android.R.layout.simple_spinner_item, districts){
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            View view = super.getView(position, convertView, parent);
-                            TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                            // Đổi màu chữ item đang hiển thị trên Spinner
-                            tv.setTextColor(Color.parseColor("#000000")); // màu cam hoặc bạn chọn màu khác
-
-                            return view;
-                        }
-                    };
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            R.layout.spinner_selected_item, districts);
+                    adapter.setDropDownViewResource(R.layout.item_spinner_custom);
                     spinnerDistrict.setAdapter(adapter);
                 }
             }

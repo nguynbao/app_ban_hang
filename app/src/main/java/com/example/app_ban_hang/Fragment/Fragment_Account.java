@@ -91,7 +91,7 @@ public class Fragment_Account extends Fragment {
                                     R.layout.spinner_selected_item,
                                     provinceList
                             );
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            adapter.setDropDownViewResource(R.layout.item_spinner_custom);
                             city.setAdapter(adapter);
                             // 👉 Sau khi set adapter xong, đặt giá trị thành phố cho user
                             String userCity = user.getAddress(); // Ví dụ: "Hồ Chí Minh"
