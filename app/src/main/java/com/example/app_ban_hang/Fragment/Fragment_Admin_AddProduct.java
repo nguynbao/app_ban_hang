@@ -113,7 +113,7 @@ public class Fragment_Admin_AddProduct extends Fragment {
                     android.R.layout.simple_spinner_dropdown_item,
                     categoryNames
             );
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(R.layout.item_spinner_custom);
             spinner_cateID.setAdapter(adapter);
         }
     }
