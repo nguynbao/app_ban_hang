@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Danh mục"
+            android:text="Danh mục "
             android:textColor="@color/white"
             android:textSize="35dp"
             android:textStyle="bold" />
