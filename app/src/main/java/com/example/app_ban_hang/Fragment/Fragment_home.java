@@ -3,13 +3,20 @@ package com.example.app_ban_hang.Fragment;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -30,6 +37,7 @@ import com.example.app_ban_hang.adapter.adapter_categories;
 import com.example.app_ban_hang.adapter.adapter_product;
 import com.example.app_ban_hang.database.ProductDao;
 import com.example.app_ban_hang.database.CategoryDao;
+import com.example.app_ban_hang.pages.page_cart_activity;
 
 
 import java.util.Arrays;
@@ -38,6 +46,7 @@ import java.util.List;
 public class Fragment_home extends Fragment {
     private RecyclerView recyclerViewBanner, recyclerViewCategory, recyclerViewProduct;
     private AppCompatButton searchButton;
+    ImageView menu;
     public Fragment_home() {
     }
     private ActivityResultLauncher<String> requestPermissionLauncher;
@@ -68,7 +77,13 @@ public class Fragment_home extends Fragment {
         recyclerViewCategory = view.findViewById(R.id.rcv2);
         recyclerViewProduct = view.findViewById(R.id.rcv3);
         searchButton = view.findViewById(R.id.search);
-
+        menu = view.findViewById(R.id.menu);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupMenu(view);
+            }
+        });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_IMAGES)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -84,11 +99,33 @@ public class Fragment_home extends Fragment {
                 requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
             }
         }
-
         setupSearchButton();
         return view;
     }
 
+    private void showPopupMenu(View anchorView) {
+        View popupView = LayoutInflater.from(getContext()).inflate(R.layout.custom_menu_item, null);
+
+        // Khởi tạo PopupWindow
+        PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true // focusable
+        );
+
+        // Bắt sự kiện click cho item
+        TextView menuCart = popupView.findViewById(R.id.menu_cart);
+        menuCart.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "You clicked Item One", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), page_cart_activity.class);
+            startActivity(intent);
+            popupWindow.dismiss();
+        });
+
+        // Hiển thị popup ở vị trí anchorView
+        popupWindow.showAsDropDown(anchorView);
+    }
 
     private void setupRecyclerViews() {
         // Banner
