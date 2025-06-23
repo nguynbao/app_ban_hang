@@ -49,7 +49,9 @@ public class adapter_wish extends RecyclerView.Adapter<adapter_wish.ViewHolder> 
         product p = productList.get(position);
 
         holder.txtName.setText(p.getProduct_name());
-        holder.txtPrice.setText(String.valueOf(p.getProduct_price()));
+        float price = p.getProduct_price();
+        String formattedPrice = String.format("%,.0f", price);
+        holder.txtPrice.setText(formattedPrice + " đ");
 
         if (p.getProduct_imgRes() != null) {
             Glide.with(context)
