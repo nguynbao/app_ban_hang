@@ -45,7 +45,8 @@ public class Fragment_Categories extends Fragment {
         btn_cate_tech.setVisibility(View.GONE);
 
         loadCate();
-
+        CategoryDao categoryDao = new CategoryDao(getContext());
+        List<categories> categoriesList = categoryDao.getAllCategories();
         Bundle bundle = new Bundle();
         back.setOnClickListener(v->{
             requireActivity().getSupportFragmentManager().popBackStack();
@@ -54,7 +55,7 @@ public class Fragment_Categories extends Fragment {
             @Override
             public void onClick(View view) {
 
-                bundle.putString("category_id", "6");
+                bundle.putString("category_id", String.valueOf(categoriesList.get(5).getCategory_id()));
                 Fragment_Product fragmentProduct = new Fragment_Product();
                 fragmentProduct.setArguments(bundle);
                 //chuyển fragment
@@ -65,7 +66,7 @@ public class Fragment_Categories extends Fragment {
         btn_cate_shoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bundle.putString("category_id", "1");
+                bundle.putString("category_id", String.valueOf(categoriesList.get(0).getCategory_id()));
                 Fragment_Product fragmentProduct = new Fragment_Product();
                 fragmentProduct.setArguments(bundle);
                 //chuyển fragment
@@ -77,7 +78,7 @@ public class Fragment_Categories extends Fragment {
             @Override
             public void onClick(View view) {
 
-                bundle.putString("category_id", "2");
+                bundle.putString("category_id", String.valueOf(categoriesList.get(1).getCategory_id()));
                 Fragment_Product fragmentProduct = new Fragment_Product();
                 fragmentProduct.setArguments(bundle);
                 //chuyển fragment
@@ -89,7 +90,7 @@ public class Fragment_Categories extends Fragment {
             @Override
             public void onClick(View view) {
 
-                bundle.putString("category_id", "3");
+                bundle.putString("category_id", String.valueOf(categoriesList.get(2).getCategory_id()));
                 Fragment_Product fragmentProduct = new Fragment_Product();
                 fragmentProduct.setArguments(bundle);
                 //chuyển fragment
@@ -101,7 +102,7 @@ public class Fragment_Categories extends Fragment {
             @Override
             public void onClick(View view) {
 
-                bundle.putString("category_id", "4");
+                bundle.putString("category_id", String.valueOf(categoriesList.get(3).getCategory_id()));
                 Fragment_Product fragmentProduct = new Fragment_Product();
                 fragmentProduct.setArguments(bundle);
                 //chuyển fragment
@@ -112,7 +113,7 @@ public class Fragment_Categories extends Fragment {
             @Override
             public void onClick(View view) {
 
-                bundle.putString("category_id", "5");
+                bundle.putString("category_id", String.valueOf(categoriesList.get(4).getCategory_id()));
                 Fragment_Product fragmentProduct = new Fragment_Product();
                 fragmentProduct.setArguments(bundle);
                 //chuyển fragment
@@ -128,42 +129,27 @@ public class Fragment_Categories extends Fragment {
         for (int i = 1; i <= size; i++){
             if (i == 1){
                 btn_cate_shoes.setVisibility(View.VISIBLE);
+                btn_cate_shoes.setText(categoriesList.get(0).getCategory_name());
             }
             if (i == 2){
                 btn_cate_clothing.setVisibility(View.VISIBLE);
+                btn_cate_clothing.setText(categoriesList.get(1).getCategory_name());
             }
             if (i == 3){
                 btn_cate_food.setVisibility(View.VISIBLE);
+                btn_cate_food.setText(categoriesList.get(2).getCategory_name());
             }
             if (i == 4){
                 btn_cate_accessories.setVisibility(View.VISIBLE);
+                btn_cate_accessories.setText(categoriesList.get(3).getCategory_name());
             }
             if (i == 5){
                 btn_cate_comestic.setVisibility(View.VISIBLE);
+                btn_cate_comestic.setText(categoriesList.get(4).getCategory_name());
             }
             if (i == 6){
                 btn_cate_tech.setVisibility(View.VISIBLE);
-            }
-        }
-
-        for (categories categories : categoriesList){
-            if (categories.getCategory_id() == 1){
-                btn_cate_shoes.setText(categories.getCategory_name());
-            }
-            if (categories.getCategory_id() == 2){
-                btn_cate_clothing.setText(categories.getCategory_name());
-            }
-            if (categories.getCategory_id() == 3){
-                btn_cate_food.setText(categories.getCategory_name());
-            }
-            if (categories.getCategory_id() == 4){
-                btn_cate_accessories.setText(categories.getCategory_name());
-            }
-            if (categories.getCategory_id() == 5) {
-                btn_cate_comestic.setText(categories.getCategory_name());
-            }
-            if (categories.getCategory_id() == 6) {
-                btn_cate_tech.setText(categories.getCategory_name());
+                btn_cate_tech.setText(categoriesList.get(5).getCategory_name());
             }
         }
     }

@@ -91,7 +91,6 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
         ProductDao productDao = new ProductDao(holder.itemView.getContext());
         product product = productDao.getById(String.valueOf(cartItem.getProduct_id()));
         Log.d("IDproduct", String.valueOf(cartItem.getProduct_id()));
-        Log.d("IDproduct", productDao.getById("1").getProduct_name());
         String imageUri = product.getProduct_imgRes(); // hoặc String imagePath
         if (imageUri != null){
             Glide.with(holder.itemView.getContext())
