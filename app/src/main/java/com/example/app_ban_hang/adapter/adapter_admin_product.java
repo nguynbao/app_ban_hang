@@ -59,7 +59,9 @@ public class adapter_admin_product extends RecyclerView.Adapter<adapter_admin_pr
                 .into(holder.product_img);
         Log.d("FragmentAdmin", "Selected Image URI: " + imgPath.toString());
         holder.product_name.setText(product.getProduct_name());
-        holder.product_price.setText(String.valueOf(product.getProduct_price()));
+        float price = product.getProduct_price();
+        String formattedPrice = String.format("%,.0f", price);
+        holder.product_price.setText(formattedPrice + " đ");
         holder.btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
