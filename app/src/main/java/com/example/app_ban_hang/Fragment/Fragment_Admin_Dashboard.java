@@ -24,7 +24,6 @@ public class Fragment_Admin_Dashboard extends Fragment {
     List<order> orderList;
     public Fragment_Admin_Dashboard() {
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,5 +35,12 @@ public class Fragment_Admin_Dashboard extends Fragment {
         adapter = new adapter_admin_All_order(orderList);
         recyclerView.setAdapter(adapter);
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        OrderDao orderDao = new OrderDao(getContext());
+        List<order> updatedOrders = orderDao.getAll();
+        adapter.updateData(updatedOrders);
     }
 }

@@ -22,7 +22,13 @@ public class adapter_admin_All_order extends RecyclerView.Adapter<adapter_admin_
     List<order> orderList;
     public adapter_admin_All_order( List<order> orderList) {
         this.orderList = orderList;
+
     }
+    public void updateData(List<order> newOrderList) {
+        this.orderList = newOrderList;
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView order_name_admin;
         AppCompatButton acpt_order;
@@ -46,7 +52,6 @@ public class adapter_admin_All_order extends RecyclerView.Adapter<adapter_admin_
         holder.order_name_admin.setText("Order ID: " + order.getOrderId());
         if ("Approved".equalsIgnoreCase(order.getStatus())) {
             holder.acpt_order.setBackgroundResource(R.drawable.btn_round_green);
-            Toast.makeText(holder.itemView.getContext(), "Đã duyệt đơn hàng!", Toast.LENGTH_SHORT).show();
             holder.acpt_order.setEnabled(false);
         } else {
             holder.acpt_order.setBackgroundResource(R.drawable.btn_round_gray);
@@ -67,6 +72,7 @@ public class adapter_admin_All_order extends RecyclerView.Adapter<adapter_admin_
                 }
             }
         });
+
         holder.order_name_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
