@@ -1,6 +1,7 @@
 package com.example.app_ban_hang.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -14,12 +15,14 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.adapter.adapter_wish;
 import com.example.app_ban_hang.database.ProductDao;
 import com.example.app_ban_hang.database.WishlistDAO;
+import com.example.app_ban_hang.pages.page_cart_activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,7 @@ public class Fragment_WishList extends Fragment {
 
     private RecyclerView recyclerView;
     private adapter_wish adapter;
+    ImageView cart;
     private List<product> productList;
 
     public Fragment_WishList() {
@@ -40,9 +44,12 @@ public class Fragment_WishList extends Fragment {
         View view = inflater.inflate(R.layout.fragment__wishlist, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        cart = view.findViewById(R.id.imageButton);
+        cart.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), page_cart_activity.class);
+            startActivity(intent);
+        });
         loadWishlistProducts();
-
         return view;
     }
     @Override
