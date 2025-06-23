@@ -101,4 +101,13 @@ public class OrderDao {
         String sql = "SELECT * FROM orders WHERE status = ? ORDER BY order_date DESC";
         return get(sql, "approved");
     }
+    public order getOrderById(int orderId) {
+        String sql = "SELECT * FROM orders WHERE order_id = ?";
+        List<order> result = get(sql, String.valueOf(orderId));
+        if (result != null && !result.isEmpty()) {
+            return result.get(0);
+        }
+        return null;
+    }
+
 }

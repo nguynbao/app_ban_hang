@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Cửa hàng trong mơ của bạn. Bạn sẽ tìm thấy
+        android:text="Cửa hàng VAA của bạn. Bạn sẽ tìm thấy
 mọi thứ bạn
 cần ở đây."
         android:textColor="@color/white"

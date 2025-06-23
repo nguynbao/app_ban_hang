@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.app_ban_hang.Model.order;
 import com.example.app_ban_hang.Model.orderItem;
 import com.example.app_ban_hang.R;
 import com.example.app_ban_hang.database.OrderDao;
@@ -62,6 +63,7 @@ public class page_admin_detail_order extends AppCompatActivity {
                 order_city.setText(city);
                 order_acpt.setOnClickListener(v -> {
                     acceptOrder(orderId);
+                    finish();
                 });
 
 
@@ -74,8 +76,19 @@ public class page_admin_detail_order extends AppCompatActivity {
 }
     private void acceptOrder(int orderId) {
         OrderDao orderDao = new OrderDao(this);
-        orderDao.approveOrder(orderId);
-        Toast.makeText(this, "Đơn hàng đã được chấp nhận!", Toast.LENGTH_SHORT).show();
-        finish();
+
+        order currentOrder = orderDao.getOrderById(orderId);
+        if (currentOrder == null) {
+            Toast.makeText(this, "Đơn hàng không tồn tại!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if ("approved".equalsIgnoreCase(currentOrder.getStatus())) {
+            Toast.makeText(this, "Đơn hàng đã được duyệt trước đó!", Toast.LENGTH_SHORT).show();
+        } else {
+            orderDao.approveOrder(orderId);
+            Toast.makeText(this, "Đơn hàng đã được chấp nhận!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
-    }
+}

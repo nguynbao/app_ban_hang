@@ -37,6 +37,7 @@ public class CategoryDao {
 
     // Hàm xóa danh mục theo id
     public int deleteCategory(int id) {
+        db.delete("products", "category_id=?", new String[]{String.valueOf(id)});
         return db.delete("categories", "category_id=?", new String[]{String.valueOf(id)});
     }
 
