@@ -31,7 +31,7 @@
             android:name=".pages_admin.page_admin_Edit_cate"
             android:exported="false" />
         <activity
-            android:name=".pages.page_intro_activity"
+            android:name=".pages.page_cart_activity"
             android:exported="false" />
         <activity
             android:name=".pages_admin.page_admin_activity"
@@ -46,7 +46,7 @@
             android:name=".pages.page_login_activity"
             android:exported="false" />
         <activity
-            android:name=".pages.page_cart_activity"
+            android:name=".pages.page_intro_activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

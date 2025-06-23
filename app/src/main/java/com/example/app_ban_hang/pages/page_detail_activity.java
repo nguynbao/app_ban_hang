@@ -24,11 +24,15 @@ import com.example.app_ban_hang.database.CartDao;
 import com.example.app_ban_hang.database.WishlistDAO;
 import com.example.app_ban_hang.database.ProductDao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class page_detail_activity extends AppCompatActivity {
     private ImageView productImgRes;
     private TextView productName;
     private TextView productPrice, txt_ProductDes;
     private ImageButton addcart, addwish;
+    private List<Integer> available_IDProduct = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,18 +83,22 @@ public class page_detail_activity extends AppCompatActivity {
                     CartDao cartDao = new CartDao(this);
                     CartItem cartItem = new CartItem(userID, productId, 1);
 
-                    // Kiểm tra sản phẩm đã có trong giỏ hàng hay chưa
-                    CartItem cartItemIdProduct = cartDao.getItemIdProduct(String.valueOf(product.getProduct_id()));
-                    if (cartItemIdProduct != null && product.getProduct_id() == cartItemIdProduct.getProduct_id()) {
-                        Toast.makeText(this, "Sản phẩm đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                    // Kiểm tra sản phẩm đã có trong giỏ hàng người dùng hay chưa
+                    List<CartItem> cartItemList = cartDao.getItemIdUser(String.valueOf(userID));
+                    for (CartItem cartItem1 : cartItemList){
+                        available_IDProduct.add(cartItem1.getProduct_id());
+                        Log.d("available_IDProduct", String.valueOf(cartItem1.getProduct_id()));
                     }
-                    else {
+                    if (!available_IDProduct.contains(productId)){
+                        Log.d("available_IDProduct1", String.valueOf(productId));
                         long check_insert = cartDao.insert(cartItem);
                         if (check_insert == -1) {
                             Toast.makeText(this, "Thêm sản phẩm thất bại", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                         }
+                    }else {
+                        Toast.makeText(this, "Sản phẩm đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
                     }
                     // Chuyển sang giỏ hàng
                     Intent intent = new Intent(page_detail_activity.this, page_cart_activity.class);
