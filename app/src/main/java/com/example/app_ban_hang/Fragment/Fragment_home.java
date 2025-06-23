@@ -105,7 +105,6 @@ public class Fragment_home extends Fragment {
 
     private void showPopupMenu(View anchorView) {
         View popupView = LayoutInflater.from(getContext()).inflate(R.layout.custom_menu_item, null);
-
         // Khởi tạo PopupWindow
         PopupWindow popupWindow = new PopupWindow(
                 popupView,
@@ -113,7 +112,6 @@ public class Fragment_home extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 true // focusable
         );
-
         // Bắt sự kiện click cho item
         TextView menuCart = popupView.findViewById(R.id.menu_cart);
         menuCart.setOnClickListener(v -> {
