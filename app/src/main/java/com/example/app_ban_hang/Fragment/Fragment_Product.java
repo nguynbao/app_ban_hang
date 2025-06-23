@@ -54,7 +54,6 @@ public class Fragment_Product extends Fragment {
             for (product product : filter_cateID){
                 Log.d("TestproductInsert",product.getProduct_name());
             }
-
         }
 
         adapter_product_overview adapterProductOverview = new adapter_product_overview(filter_cateID);

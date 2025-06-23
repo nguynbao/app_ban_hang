@@ -55,7 +55,7 @@ public class adapter_product_overview extends RecyclerView.Adapter<adapter_produ
         if (imgRes != null && !imgRes.isEmpty()) {
             holder.product_img.setImageURI(Uri.parse(imgRes));}
         holder.product_name.setText(currentProduct.getProduct_name());
-        holder.product_price.setText(String.format("%.2f", currentProduct.getProduct_price()));
+        holder.product_price.setText(String.valueOf((int)currentProduct.getProduct_price()));
         holder.btn_Detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

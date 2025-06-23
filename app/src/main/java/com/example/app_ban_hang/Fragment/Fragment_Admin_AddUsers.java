@@ -68,7 +68,7 @@ public class Fragment_Admin_AddUsers extends Fragment {
                             R.layout.spinner_selected_item,
                             provinceList
                     );
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapter.setDropDownViewResource(R.layout.item_spinner_custom);
                     ad_add_city_user.setAdapter(adapter);
                 }else {
                     Log.d("API", "Response failed or empty body, code: " + response.code());

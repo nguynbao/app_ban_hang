@@ -27,7 +27,7 @@ import com.example.app_ban_hang.database.ProductDao;
 public class page_detail_activity extends AppCompatActivity {
     private ImageView productImgRes;
     private TextView productName;
-    private TextView productPrice;
+    private TextView productPrice, txt_ProductDes;
     private ImageButton addcart, addwish;
 
     @Override
@@ -47,6 +47,7 @@ public class page_detail_activity extends AppCompatActivity {
         productPrice = findViewById(R.id.detail_price);
         addcart = findViewById(R.id.addcart);
         addwish = findViewById(R.id.add_wish);
+        txt_ProductDes = findViewById(R.id.txt_ProductDes);
 
         // Nhận productId từ Intent
         int productId = getIntent().getIntExtra("intID", -1);
@@ -65,13 +66,14 @@ public class page_detail_activity extends AppCompatActivity {
                         .into(productImgRes);
                 // Hiển thị tên và giá
                 productName.setText(product.getProduct_name());
-                productPrice.setText(String.valueOf(product.getProduct_price()));
+                productPrice.setText(String.valueOf((int)product.getProduct_price()));
+                txt_ProductDes.setText(product.getProduct_description());
 
                 // Xử lý nút thêm giỏ hàng
                 addcart.setOnClickListener(v -> {
                     SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
                     int userID = sharedPreferences.getInt("user_id", -1); // -1 nếu chưa đăng nhập
-                    Log.d("USERIID", String.valueOf(userID));
+                    Log.d("USERID", String.valueOf(userID));
 
                     CartDao cartDao = new CartDao(this);
                     CartItem cartItem = new CartItem(userID, productId, 1);

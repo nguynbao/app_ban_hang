@@ -76,7 +76,7 @@ public class ProductDao {
 
     //Xóa 1 sản phẩm theo id
     public int delete(String id){
-        return db.delete("products", "product_id=?", new String[]{id});
+            return db.delete("products", "product_id=?", new String[]{id});
     }
     //Cập nhật 1 sản phẩm
     public int update(product product){
