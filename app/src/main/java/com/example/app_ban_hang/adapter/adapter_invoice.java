@@ -51,9 +51,9 @@ public class adapter_invoice extends RecyclerView.Adapter<adapter_invoice.ViewHo
         ProductDao productDao = new ProductDao(holder.itemView.getContext());
         product product = productDao.getById(String.valueOf(cartItem.getProduct_id()));
         holder.nameProduct.setText(product.getProduct_name());
-        holder.priceProduct.setText(String.valueOf((int)product.getProduct_price()));
+        holder.priceProduct.setText(String.format("%,d",(int)product.getProduct_price()));
         holder.quantity_Product.setText(String.valueOf(cartItem.getQuantity()));
-        holder.totalPrice.setText(String.valueOf((int)(cartItem.getQuantity() * product.getProduct_price())));
+        holder.totalPrice.setText(String.format("%,d",(int)(cartItem.getQuantity() * product.getProduct_price())));
 
 
     }

@@ -70,7 +70,7 @@ public class page_detail_activity extends AppCompatActivity {
                         .into(productImgRes);
                 // Hiển thị tên và giá
                 productName.setText(product.getProduct_name());
-                productPrice.setText(String.valueOf((int)product.getProduct_price()));
+                productPrice.setText(String.format("%,d", (int)product.getProduct_price()));
                 txt_ProductDes.setText(product.getProduct_description());
 
                 // Xử lý nút thêm giỏ hàng

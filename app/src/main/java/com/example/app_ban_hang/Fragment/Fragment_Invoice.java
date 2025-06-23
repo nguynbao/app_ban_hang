@@ -57,13 +57,13 @@ public class Fragment_Invoice extends Fragment {
         Log.d("test", String.valueOf(fee));
 
         TextView tax = view.findViewById(R.id.tax);
-        tax.setText(String.valueOf(fee));
+        tax.setText(String.format("%,d",(int)fee));
 
         TextView textView9 = view.findViewById(R.id.textView9);
-        textView9.setText(String.valueOf(fee));
+        textView9.setText(String.format("%,d",(int)fee));
 
         TextView totalAll = view.findViewById(R.id.totalAll);
-        totalAll.setText(String.valueOf((int)(adapterInvoice.totalAll() + fee*2)));
+        totalAll.setText(String.format("%,d", (int)(adapterInvoice.totalAll() + fee*2)));
 
         Button btn_Order = view.findViewById(R.id.btn_Order);
         btn_Order.setOnClickListener(v -> {
