@@ -62,6 +62,7 @@ public class page_admin_detail_order extends AppCompatActivity {
                 order_city.setText(city);
                 order_acpt.setOnClickListener(v -> {
                     acceptOrder(orderId);
+                    finish();
                 });
 
 
