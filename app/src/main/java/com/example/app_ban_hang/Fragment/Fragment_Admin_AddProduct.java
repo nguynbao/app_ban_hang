@@ -106,6 +106,8 @@ public class Fragment_Admin_AddProduct extends Fragment {
 
     private void refreshCategorySpinner() {
         if (getContext() != null) {
+            int previousSelection = spinner_cateID.getSelectedItemPosition(); // Lưu vị trí trước
+
             CategoryDao categoryDao = new CategoryDao(getContext());
             List<String> categoryNames = categoryDao.getAllCategoryNames();
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -115,8 +117,14 @@ public class Fragment_Admin_AddProduct extends Fragment {
             );
             adapter.setDropDownViewResource(R.layout.item_spinner_custom);
             spinner_cateID.setAdapter(adapter);
+
+            // Set lại vị trí đã chọn trước đó (nếu hợp lệ)
+            if (previousSelection >= 0 && previousSelection < categoryNames.size()) {
+                spinner_cateID.setSelection(previousSelection);
+            }
         }
     }
+
 
     private void resetForm() {
         edt_productName.setText("");
