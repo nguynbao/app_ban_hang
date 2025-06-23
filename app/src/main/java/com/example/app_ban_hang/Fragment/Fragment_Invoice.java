@@ -63,7 +63,7 @@ public class Fragment_Invoice extends Fragment {
         textView9.setText(String.valueOf(fee));
 
         TextView totalAll = view.findViewById(R.id.totalAll);
-        totalAll.setText(String.valueOf(adapterInvoice.totalAll() + fee*2));
+        totalAll.setText(String.valueOf((int)(adapterInvoice.totalAll() + fee*2)));
 
         Button btn_Order = view.findViewById(R.id.btn_Order);
         btn_Order.setOnClickListener(v -> {

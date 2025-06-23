@@ -73,6 +73,7 @@ public class page_detail_activity extends AppCompatActivity {
                 addcart.setOnClickListener(v -> {
                     SharedPreferences sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE);
                     int userID = sharedPreferences.getInt("user_id", -1); // -1 nếu chưa đăng nhập
+                    Log.d("UserID_pageDetail", String.valueOf(userID));
                     Log.d("USERID", String.valueOf(userID));
 
                     CartDao cartDao = new CartDao(this);

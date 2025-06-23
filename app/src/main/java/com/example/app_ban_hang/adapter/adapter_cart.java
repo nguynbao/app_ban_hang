@@ -98,7 +98,7 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
                     .into(holder.productImage);
         }
         holder.productName.setText(product.getProduct_name());
-        holder.productPrice.setText(String.valueOf(product.getProduct_price()));
+        holder.productPrice.setText(String.valueOf((int) product.getProduct_price()));
         holder.txtQuantity.setText(String.valueOf(cartItem.getQuantity()));
         holder.btnIncrease.setOnClickListener(v -> {
             CartDao  cartDao = new CartDao(v.getContext());
