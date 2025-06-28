@@ -60,6 +60,20 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Phone"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your phone"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/black"
+            android:textColorHint="@color/gray"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Email"
             android:textColor="@color/black"/>
         <EditText

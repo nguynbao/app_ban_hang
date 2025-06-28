@@ -3,6 +3,7 @@ package com.example.app_ban_hang.Fragment;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import retrofit2.Response;
 
 
 public class Fragment_Account extends Fragment {
-    private EditText fullname, email, pass;
+    private EditText fullname, email, pass,phone;
     Spinner city;
 
     AppCompatButton save;
@@ -45,12 +46,14 @@ public class Fragment_Account extends Fragment {
     public Fragment_Account() {
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__account, container, false);
         fullname = view.findViewById(R.id.fullname);
         email = view.findViewById(R.id.email);
+        phone = view.findViewById(R.id.phone);
         pass = view.findViewById(R.id.pass);
         city = view.findViewById(R.id.city);
         save = view.findViewById(R.id.save);
@@ -62,11 +65,25 @@ public class Fragment_Account extends Fragment {
             String fullnamee = this.fullname.getText().toString();
             String email = this.email.getText().toString();
             String pass = this.pass.getText().toString();
+            String phoneStr = this.phone.getText().toString();
+            if (fullnamee.isEmpty() || email.isEmpty() || pass.isEmpty() || phoneStr.isEmpty()) {
+                Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            int phone = 0;
+            try {
+                phone = Integer.parseInt(phoneStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Số điện thoại không hợp lệ!", Toast.LENGTH_SHORT).show();
+                return; // Thoát, không cập nhật
+            }
+
             String city = this.city.getSelectedItem().toString();
 
             users user = userDAO.getUserById(userId);
             user.setUser_name(fullnamee);
             user.setUser_email(email);
+            user.setPhone(phone);
             user.setUser_password(pass);
             user.setAddress(city);
             userDAO.update(user); // Gọi DAO để cập nhật dữ liệu
@@ -79,6 +96,7 @@ public class Fragment_Account extends Fragment {
                 fullname.setText(user.getUser_name());
                 email.setText(user.getUser_email());
                 pass.setText(user.getUser_password());
+                phone.setText("0"+user.getPhone());
                 api.getProvinces().enqueue(new Callback<List<Province>>() {
                     @Override
                     public void onResponse(Call<List<Province>> call, Response<List<Province>> response) {
