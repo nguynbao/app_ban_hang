@@ -51,7 +51,7 @@ public class adapter_all_product extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_product, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_pro, parent, false);
             holder = new ViewHolder();
             holder.tvName = convertView.findViewById(R.id.product_namee);
             holder.tvPrice = convertView.findViewById(R.id.product_pricee);

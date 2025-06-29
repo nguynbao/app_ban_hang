@@ -78,7 +78,9 @@ public class adapter_admin_All_order extends RecyclerView.Adapter<adapter_admin_
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), page_admin_detail_order.class);
                 intent.putExtra("order_id", order.getOrderId());
+                intent.putExtra("customer_id", order.getUserId());
                 intent.putExtra("city", order.getShippingAddress());
+                intent.putExtra("price", order.getTotalAmount());
                 view.getContext().startActivity(intent);
             }
         });

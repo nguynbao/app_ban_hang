@@ -1,10 +1,12 @@
 package com.example.app_ban_hang.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.app_ban_hang.Model.product;
 import com.example.app_ban_hang.R;
+import com.example.app_ban_hang.pages.page_detail_activity;
 
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class adapter_wish extends RecyclerView.Adapter<adapter_wish.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         ImageView imgProduct;
         TextView txtName, txtPrice;
 
@@ -52,6 +56,15 @@ public class adapter_wish extends RecyclerView.Adapter<adapter_wish.ViewHolder> 
         float price = p.getProduct_price();
         String formattedPrice = String.format("%,.0f", price);
         holder.txtPrice.setText(formattedPrice + " đ");
+       holder.itemView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(context, page_detail_activity.class);
+               intent.putExtra("intID", p.getProduct_id());
+               context.startActivity(intent);
+           }
+       });
+
 
         if (p.getProduct_imgRes() != null) {
             Glide.with(context)

@@ -21,19 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/order_customer"
-            android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:gravity="start|center"
-            android:padding="15dp"
-            android:background="@drawable/edt_underline"
-            android:hint="Customer"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray" />
         <TextView
             android:id="@+id/order_ID"
             android:layout_width="match_parent"
@@ -47,7 +34,19 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray" />
         <TextView
-            android:id="@+id/order_quanty"
+            android:id="@+id/order_customer"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:gravity="start|center"
+            android:padding="15dp"
+            android:background="@drawable/edt_underline"
+            android:hint="Customer"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
+        <TextView
+            android:id="@+id/Product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -55,7 +54,19 @@
             android:gravity="start|center"
             android:padding="15dp"
             android:background="@drawable/edt_underline"
-            android:hint="Số lượng"
+            android:hint="Product"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
+        <TextView
+            android:id="@+id/Prices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/black"
+            android:gravity="start|center"
+            android:padding="15dp"
+            android:background="@drawable/edt_underline"
+            android:hint="Prices"
             android:textColor="@color/black"
             android:textColorHint="@color/gray" />
         <TextView

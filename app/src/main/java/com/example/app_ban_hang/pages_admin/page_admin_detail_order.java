@@ -21,7 +21,7 @@ import java.util.List;
 
 public class page_admin_detail_order extends AppCompatActivity {
 
-    private TextView order_customer, order_ID, order_quanty, order_city;
+    private TextView order_customer, order_ID, order_city, order_price, order_product;
     private AppCompatButton order_acpt;
     int orderId;
 
@@ -40,27 +40,35 @@ public class page_admin_detail_order extends AppCompatActivity {
         // Ánh xạ các View
         order_customer = findViewById(R.id.order_customer);
         order_ID = findViewById(R.id.order_ID);
-        order_quanty = findViewById(R.id.order_quanty);
+        order_product = findViewById(R.id.Product);
+        order_price = findViewById(R.id.Prices);
         order_city = findViewById(R.id.order_city);
         order_acpt = findViewById(R.id.order_acpt);
 
         // Lấy order_id từ Intent
       orderId = getIntent().getIntExtra("order_id", -1);
+        // Lấy customer_id từ Intent
+        int customerId = getIntent().getIntExtra("customer_id", -1);
 
         if (orderId != -1) {
             order_ID.setText("Mã đơn: " + orderId);
             OrderItemDao orderItemDao = new OrderItemDao(this);
             List<orderItem> itemList = orderItemDao.getOrderItemsByOrderId(orderId);
+
             if (!itemList.isEmpty()) {
                 int totalQuantity = 0;
+                float totalPrice = 0;
                 String city = getIntent().getStringExtra("city");
                 for (orderItem item : itemList) {
                     totalQuantity += item.getQuantity();
-
+                    totalPrice += (float) (item.getUnitPrice() * item.getQuantity());
                 }
-                order_quanty.setText("Số lượng: " + totalQuantity);
-                order_customer.setText("Khách hàng: " + itemList.get(0).getOrderId());
+                if(customerId != -1){
+                    order_customer.setText("Mã khách hàng: " + customerId);
+                }
                 order_city.setText(city);
+                order_product.setText("Sản phẩm: " + itemList.size());
+                order_price.setText("Tổng tiền: " + totalPrice + " VND");
                 order_acpt.setOnClickListener(v -> {
                     acceptOrder(orderId);
                     finish();
