@@ -11,7 +11,7 @@
         android:layout_weight="1">
         <TextView
             android:id="@+id/nameProduct"
-            android:layout_width="0dp"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tên sản phẩm"
@@ -20,28 +20,27 @@
             android:textAlignment="textStart"/>
         <TextView
             android:id="@+id/priceProduct"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Price"
+            android:text="15,000,000.0"
+            android:layout_marginRight="15dp"
             android:textColor="@color/black"
             android:textAlignment="textEnd"/>
         <TextView
             android:id="@+id/quantity_Product"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Quantity"
+            android:text="100"
+            android:layout_marginRight="15dp"
             android:textColor="@color/black"
             android:textAlignment="textEnd"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/totalPrice"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Thành tiền"
+        android:text="15,000,000.0"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textStyle="bold" />

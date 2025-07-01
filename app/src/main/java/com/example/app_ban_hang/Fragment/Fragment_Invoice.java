@@ -53,24 +53,15 @@ public class Fragment_Invoice extends Fragment {
         adapter_invoice adapterInvoice = new adapter_invoice(cartItemList, getContext());
         recyclerView3.setAdapter(adapterInvoice);
 
-        float fee = 0.1f  * adapterInvoice.totalAll();
-        Log.d("test", String.valueOf(fee));
-
-        TextView tax = view.findViewById(R.id.tax);
-        tax.setText(String.format("%,d",(int)fee));
-
-        TextView textView9 = view.findViewById(R.id.textView9);
-        textView9.setText(String.format("%,d",(int)fee));
-
         TextView totalAll = view.findViewById(R.id.totalAll);
-        totalAll.setText(String.format("%,d", (int)(adapterInvoice.totalAll() + fee*2)));
+        totalAll.setText(String.format("%,d", (int)(adapterInvoice.totalAll())));
 
         Button btn_Order = view.findViewById(R.id.btn_Order);
         btn_Order.setOnClickListener(v -> {
             Fragment_Address fragment = new Fragment_Address();
             Bundle bundle = new Bundle();
             bundle.putIntegerArrayList("cartIDList", cartIDList1);
-            bundle.putFloat("totalAll", adapterInvoice.totalAll() + fee*2);
+            bundle.putFloat("totalAll", adapterInvoice.totalAll());
             fragment.setArguments(bundle);
 
             // Replace fragment

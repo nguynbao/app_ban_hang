@@ -93,4 +93,11 @@ public class CartDao {
         return db.delete("cart_items", "product_id = ?", new String[]{String.valueOf(productID)});
     }
 
+
+    public int deletedCartByIdCart(int cartID){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("cart_item_id", cartID);
+        return db.delete("cart_items", "cart_item_id = ?", new String[]{String.valueOf(cartID)});
+    }
+
 }

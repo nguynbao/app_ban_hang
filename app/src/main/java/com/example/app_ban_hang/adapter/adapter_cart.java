@@ -47,8 +47,7 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
         public ImageView productImage;
         public TextView productName;
         public TextView productPrice;
-        public Button btnDecrease;
-        public Button btnIncrease;
+        public Button btnIncrease, btn_delete, btnDecrease;
         public TextView txtQuantity;
         public CheckBox selected_Item;
 
@@ -61,6 +60,7 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
             btnIncrease = view.findViewById(R.id.btn_increase);
             txtQuantity = view.findViewById(R.id.txt_quantity);
             selected_Item = view.findViewById(R.id.selected_Item);
+            btn_delete = view.findViewById(R.id.btn_delete);
 
         }
     }
@@ -142,6 +142,14 @@ public class adapter_cart extends RecyclerView.Adapter<adapter_cart.ViewHolder>{
                     Toast.makeText(holder.itemView.getContext(), "Đã thêm vào danh sách chọn", Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+
+        holder.btn_delete.setOnClickListener(view -> {
+            CartDao  cartDao = new CartDao(view.getContext());
+            cartDao.deletedCartByIdCart(cartItem.getCart_id());
+            cartItemList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, cartItemList.size());
         });
 
     }

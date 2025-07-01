@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.01" />
 
-    <EditText
+    <TextView
         android:id="@+id/edtPhone"
         android:layout_width="match_parent"
 
@@ -75,6 +75,7 @@
         android:textColorHint="@color/gray"
         android:textSize="15dp"
         android:textColor="@color/black"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +117,17 @@
         app:layout_constraintTop_toBottomOf="@+id/edtAddress"
         android:gravity="center_vertical"/>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinnerDistrict" />
+
     <Spinner
         android:id="@+id/spinnerCity"
         android:layout_width="match_parent"
@@ -129,6 +141,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerDistrict" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinnerCity" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnShipToHome"
