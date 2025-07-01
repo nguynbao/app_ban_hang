@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +32,8 @@ public class page_detail_activity extends AppCompatActivity {
     private ImageView productImgRes;
     private TextView productName;
     private TextView productPrice, txt_ProductDes;
-    private ImageButton addcart, addwish;
+    private Button addcart;
+    private ImageButton addwish,btn_back, btn_cart ;
     private List<Integer> available_IDProduct = new ArrayList<>();
 
     @Override
@@ -52,6 +54,15 @@ public class page_detail_activity extends AppCompatActivity {
         addcart = findViewById(R.id.addcart);
         addwish = findViewById(R.id.add_wish);
         txt_ProductDes = findViewById(R.id.txt_ProductDes);
+
+        btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(view -> finish());
+
+        btn_cart = findViewById(R.id.btn_cart);
+        btn_cart.setOnClickListener(view -> {
+            Intent intent = new Intent(page_detail_activity.this, page_cart_activity.class);
+            startActivity(intent);
+        });
 
         // Nhận productId từ Intent
         int productId = getIntent().getIntExtra("intID", -1);
