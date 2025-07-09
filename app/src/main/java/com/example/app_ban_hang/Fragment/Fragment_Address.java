@@ -88,6 +88,23 @@ public class Fragment_Address extends Fragment {
                             getContext(), R.layout.spinner_selected_item, provinceList);
                     adapter.setDropDownViewResource(R.layout.item_spinner_custom);
                     spinnerCity.setAdapter(adapter);
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("UserSession", MODE_PRIVATE);
+                    int userID = sharedPreferences.getInt("user_id", -1);
+                    UserDAO userDAO1= new UserDAO(getContext());
+                    users user1 = userDAO1.getUserById(userID);
+                    String user_city = user1.getAddress();
+
+                    int user_city_position = 0;
+                    for (int a = 0; a < provinceList.size(); a++){
+                        if (provinceList.get(a).getName().equals(user_city)){
+                            user_city_position = a;
+                            break;
+                        }
+                    }
+                    Log.d("user_city", user_city + user_city_position);
+                    spinnerCity.setSelection(user_city_position);
+                    loadDistricts(provinceList.get(user_city_position).getCode(), spinnerDistrict);
+
                     spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
