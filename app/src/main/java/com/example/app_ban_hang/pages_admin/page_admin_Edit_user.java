@@ -58,7 +58,7 @@ public class page_admin_Edit_user extends AppCompatActivity {
             admin_fullname.setText(user.getUser_name());
             admin_email.setText(user.getUser_email());
             admin_pass.setText(user.getUser_password());
-            admin_phone.setText(String.valueOf(user.getPhone()));
+            admin_phone.setText("0" + String.valueOf(user.getPhone()));
         } else {
             Toast.makeText(this, "Không tìm thấy người dùng!", Toast.LENGTH_SHORT).show();
         }

@@ -131,7 +131,7 @@ public class Fragment_Address extends Fragment {
         int userID = sharedPreferences.getInt("user_id", -1);
         UserDAO userDAO = new UserDAO(getContext());
         users users = userDAO.getUserById(userID);
-        edtPhone.setText(String.valueOf(users.getPhone()));
+        edtPhone.setText("0"+String.valueOf(users.getPhone()));
 
         // Xử lý khi bấm đặt hàng
         btn_Order.setOnClickListener(v -> {
